@@ -1,0 +1,45 @@
+{
+  "name": "autospace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm install && node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "server": "nodemon --inspect server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenBKnight/myAutoSpace.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenBKnight/myAutoSpace/issues"
+  },
+  "homepage": "https://github.com/BenBKnight/myAutoSpace#readme",
+  "dependencies": {
+    "animate.css": "^4.1.0",
+    "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^5.2.0",
+    "dotenv": "^8.2.0",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "firebase": "^7.18.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
+    "npm": "^6.14.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "react-notifications-component": "^2.4.0",
+    "sequelize": "^6.3.3"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
+  }
+}
