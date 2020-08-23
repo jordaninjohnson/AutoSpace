@@ -26,7 +26,7 @@ function Vehicles(props) {
   const [locationLastOwned, setLocationLastOwned] = useState("");
   const [imageUrl, setImageUrl] = React.useState(null);
   const [percentage, setPercentage] = useState(0);
-  const [didMount, setDidMount] = useState(false);
+  // const [didMount, setDidMount] = useState(false);
 
   const [activeType, setActiveType] = useState({
     car: true,

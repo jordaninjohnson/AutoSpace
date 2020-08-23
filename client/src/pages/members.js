@@ -20,7 +20,7 @@ export default function Members(props) {
 
   // console.log("authContext: " + JSON.stringify(userId));
 
-  useEffect(() => {
+  useEffect((setUserId, userId, userVehicles),() => {
     setDidMount(true);
     // console.log(userId)
     API.allVehicles(userId.id)

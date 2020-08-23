@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import Login from "./pages/login";
 import Members from "./pages/members";
@@ -9,7 +9,7 @@ import Vehicles from "./pages/vehicles";
 import VehicleDisplay from "./pages/vehicleDisplay";
 import NewMaintenance from "./pages/newMaintenance";
 import ReactNotification from "react-notifications-component";
-import { AuthProvider, AuthContext } from "./utils/authContext";
+import { AuthProvider } from "./utils/authContext";
 import ProtectedRoute from './utils/protectedRoute';
 
 export default function App() {
