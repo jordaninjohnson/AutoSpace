@@ -20,7 +20,7 @@ export default function Members(props) {
 
   // console.log("authContext: " + JSON.stringify(userId));
 
-  useEffect((setUserId, userId, userVehicles),() => {
+  useEffect(() => {
     setDidMount(true);
     // console.log(userId)
     API.allVehicles(userId.id)
@@ -30,13 +30,13 @@ export default function Members(props) {
           ...userVehicles,
           ...res.data
         ])
-        if (Notification.permission === "granted" && userId.showNotification === true) {
-          navigator.serviceWorker.getRegistration().then(reg => {
-            reg.showNotification("You have " + res.data.length + " vehicles in your garage.");
-          });
+        // if (Notification.permission === "granted" && userId.showNotification === true) {
+          // navigator.serviceWorker.getRegistration().then(reg => {
+          //   reg.showNotification("You have " + res.data.length + " vehicles in your garage.");
+          // });
           // console.log("my notification");
-          setUserId({ ...userId, showNotification: false });
-        }
+          // setUserId({ ...userId, showNotification: false });
+        // }
       })
       .catch(err => {
         console.log(err);
