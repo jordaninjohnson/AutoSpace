@@ -5,7 +5,7 @@ import { withRouter, Link } from "react-router-dom";
 import Navbar from '../components/Navbar copy';
 import NavbarLink from '../components/NavbarLink';
 import ActionBtn from '../components/ActionBtn';
-import FormLine from '../components/FormLine';
+// import FormLine from '../components/FormLine';
 import VehicleMaintBox from '../components/VehicleMaintBox';
 
 
@@ -68,7 +68,7 @@ class MaintRecord extends Component {
                         {/* <CarInfoSidebar vehicle={this.state.vehicle}/> */}
                     </div>
                     <div className='garageMain'>
-                        <h1 className='garagePageTitle'></h1>
+                        {/* <h1 className='garagePageTitle'></h1> */}
                         <img className='' src={this.state.data.imageUrl} alt='Maintenance'/>
                         <br></br>
                         <br></br>

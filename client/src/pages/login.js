@@ -104,6 +104,7 @@ function Login(props) {
               }
             });
             break;
+            default:
         }
       });
   };
