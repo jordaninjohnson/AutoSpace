@@ -40,11 +40,12 @@ router.post("/api/signup", (req, res) => {
             lastName: user.dataValues.lastName,
             firstName: user.dataValues.firstName
           })
-            .catch(err => {
+        })
+          .catch(err => {
               console.log(err)
               res.status(401).send("Auth Unsuccessful");
             });
-        })
+        
     }
   })
 });
