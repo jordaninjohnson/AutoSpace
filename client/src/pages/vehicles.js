@@ -8,7 +8,6 @@ import Navbar from '../components/Navbar copy';
 import NavbarLink from '../components/NavbarLink';
 import ActionBtn from '../components/ActionBtn';
 import FormImg from '../components/FormImg';
-import { useEffect } from "react";
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
 const db = app.firestore();
@@ -89,13 +88,13 @@ function Vehicles(props) {
       imageUrl: imageUrl
     };
     if (imageUrl !== null) {
-      // await db.collection("users").doc(vin).set({
-      //   make: make,
-      //   model: model,
-      //   year: year,
-      //   vin: vin,
-      //   image: imageUrl,
-      // });
+      await db.collection("users").doc(vin).set({
+        make: make,
+        model: model,
+        year: year,
+        vin: vin,
+        image: imageUrl,
+      });
     }
     API.newVehicle(vehicleNew)
       .then(() => {
