@@ -19,7 +19,6 @@ class MaintRecord extends Component {
     };
 
     componentDidMount() {
-        // console.log('maintData: ' + this.state.data);
         let location = this.props.match.params.id;
         this.setState({
             id: location
@@ -54,7 +53,6 @@ class MaintRecord extends Component {
     signOut = () => { localStorage.removeItem("jwt.Token") }
 
     render() {
-        // console.log(this.state);
         return (
             <>
                 <Navbar>

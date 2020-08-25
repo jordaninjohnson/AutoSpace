@@ -32,7 +32,6 @@ class NewMaintenance extends Component {
     };
   };
   handleInputChange = event => {
-    // console.log(this.state)
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
     const name = event.target.id;
@@ -42,25 +41,17 @@ class NewMaintenance extends Component {
         [name]: value
       }
     });
-    // if (!this.state.email || !this.state.password) {
-    //     return;
-    // }
   };
   handleSelect = event => {
     let value = event.target.value;
     const name = event.target.id;
-    // console.log(event, value, name)
 
     this.setState({
       [name]: value
     });
-    // if (!this.state.email || !this.state.password) {
-    //     return;
-    // }
   };
   handleFormSubmit = async (e) => {
     e.preventDefault();
-    // this.setDate();
     let newMaint = this.state.maintToAdd;
     newMaint.VehicleId = this.state.vehicleID;
     API.maintRecord(newMaint)
@@ -101,7 +92,6 @@ class NewMaintenance extends Component {
   };
 
   apiCall = () => {
-    // console.log(this.state.vehicleID)
     API.vehicleById(this.state.vehicleID)
       .then((res) => {
         this.setState({

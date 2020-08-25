@@ -22,7 +22,6 @@ export default function Members(props) {
     setDidMount(true);
     API.allVehicles(userId.id)
       .then(res => {
-        // console.log(res)
         setVehicle([
           ...userVehicles,
           ...res.data
