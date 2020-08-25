@@ -1,3 +1,4 @@
+import Message from "../components/Message";
 import React, { useContext, useState } from "react";
 import './vehicles.css';
 import FormInputTwo from "../components/FormInputTwo";
@@ -7,12 +8,8 @@ import Navbar from '../components/Navbar copy';
 import NavbarLink from '../components/NavbarLink';
 import ActionBtn from '../components/ActionBtn';
 import FormImg from '../components/FormImg';
-import { useEffect } from "react";
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
-import { store } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import "animate.css";
 const db = app.firestore();
 
 function Vehicles(props) {
@@ -26,7 +23,6 @@ function Vehicles(props) {
   const [locationLastOwned, setLocationLastOwned] = useState("");
   const [imageUrl, setImageUrl] = React.useState(null);
   const [percentage, setPercentage] = useState(0);
-  // const [didMount, setDidMount] = useState(false);
 
   const [activeType, setActiveType] = useState({
     car: true,
@@ -76,8 +72,6 @@ function Vehicles(props) {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    // console.log('hit');
     let vehicleNew = {
       type: vehicleType,
       make: make,
@@ -93,45 +87,25 @@ function Vehicles(props) {
       UserId: userId.id,
       imageUrl: imageUrl
     };
-    await db.collection("users").doc(vin).set({
-      make: make,
-      model: model,
-      year: year,
-      vin: vin,
-      image: imageUrl,
-    });
-    // console.log(vehicleNew)
+    if (imageUrl !== null) {
+      await db.collection("users").doc(vin).set({
+        make: make,
+        model: model,
+        year: year,
+        vin: vin,
+        image: imageUrl,
+      });
+    }
     API.newVehicle(vehicleNew)
-      .then((res) => {
-        // console.log("api returned", res);
+      .then(() => {
         setUserId({ ...userId, showNotification: true });
-        // console.log("api returned", res);
         props.history.push("/Members");
-        store.addNotification({
-          message: "Added new vehicle.",
-          type: "success",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__bounceIn"],
-          animationOut: ["animate__animated", "animate__bounceOut"],
-          dismiss: {
-            duration: 1500
-          }
-        });
+        const info = ["Added new vehicle.", "success", "animate__bounceIn", "animate__bounceOut"]
+        Message(info);
       })
-      .catch(err => {
-        console.log(err);
-        store.addNotification({
-          message: "Please fill out all the required fields!",
-          type: "warning",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__shakeX"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 1500
-          }
-        });
+      .catch(() => {
+        const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
+        Message(info);
       });
   };
 
@@ -173,14 +147,10 @@ function Vehicles(props) {
       default:
         break;
     }
-    // console.log(activeCondition, activeOwners, activeType)
   }
-  useEffect(() => {
-    // console.log(userId.id)
-  })
   const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); }
 
-  
+
 
   return (
     <>
@@ -231,9 +201,9 @@ function Vehicles(props) {
             <FormInputTwo setWidth='width45' name='accidents' type='text' label='Number of Accidents' id="accidents" value={accidents} handleInputChange={handleInputChange}></FormInputTwo>
           </span>
           <span>
-          <label className='photoFileLabel'>Add Photo</label>
+            <label className='photoFileLabel'>Add Photo</label>
             <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
-            <ImageUpload onFileChange={onFileChange}/>
+            <ImageUpload onFileChange={onFileChange} />
           </span>
           <ActionBtn url='#' handleClick={handleFormSubmit}>Add Vehicle</ActionBtn>
         </div>

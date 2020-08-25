@@ -18,29 +18,25 @@ export default function Members(props) {
   const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); }
   const [didMount, setDidMount] = useState(false);
 
-  // console.log("authContext: " + JSON.stringify(userId));
-
   useEffect(() => {
     setDidMount(true);
-    // console.log(userId)
     API.allVehicles(userId.id)
       .then(res => {
-        // console.log(res)
         setVehicle([
           ...userVehicles,
           ...res.data
         ])
-        // if (Notification.permission === "granted" && userId.showNotification === true) {
+        if (Notification.permission === "granted" && userId.showNotification === true) {
           // navigator.serviceWorker.getRegistration().then(reg => {
           //   reg.showNotification("You have " + res.data.length + " vehicles in your garage.");
           // });
-          // console.log("my notification");
+          console.log("my notification");
           // setUserId({ ...userId, showNotification: false });
-        // }
+        }
       })
       .catch(err => {
         console.log(err);
-      })
+      });
 
     API.userData(userId.id)
       .then(res => {
@@ -52,7 +48,7 @@ export default function Members(props) {
       })
       .catch(err => {
         console.log(err);
-      })
+      });
 
   }, [])
 
@@ -60,8 +56,6 @@ export default function Members(props) {
   if (!didMount) {
     return null;
   }
-
-  // console.log(userVehicles);
 
   return (
     <>

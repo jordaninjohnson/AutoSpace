@@ -1,3 +1,4 @@
+import Message from "../components/Message";
 import React from "react";
 import './login.css';
 import API from "../utils/API";
@@ -12,9 +13,6 @@ import BulletPoint from '../components/BulletPoint';
 import FormInputTwo from '../components/FormInputTwo'
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
-import { store } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import "animate.css";
 const db = app.firestore();
 
 function Login(props) {
@@ -29,27 +27,15 @@ function Login(props) {
   const [imageUrl, setImageUrl] = React.useState(null);
   const [percentage, setPercentage] = useState(0);
 
-  // console.log("authContex:" + JSON.stringify(userId));
-
   const handleLogInSubmit = (e) => {
     e.preventDefault();
-    // console.log('hit');
     let user = {
       email: emailInput.trim(),
       password: passwordInput.trim()
     }
     if (!emailInput || !passwordInput) {
-      store.addNotification({
-        message: "Enter email and password!",
-        type: "danger",
-        insert: "top",
-        container: "top-center",
-        animationIn: ["animate__animated", "animate__shakeX"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 1500
-        }
-      });
+      const info = ["Enter email and password!", "danger", "animate__shakeX", "animate__fadeOut"]
+      Message(info);
       return;
     }
     API.loginUser(user)
@@ -64,47 +50,20 @@ function Login(props) {
           imageUrl: imageUrl
         })
         props.history.push("/Members");
-        store.addNotification({
-          message: "Logged-in",
-          type: "success",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__bounceIn"],
-          animationOut: ["animate__animated", "animate__bounceOut"],
-          dismiss: {
-            duration: 1500
-          }
-        });
+        const info = ["Logged-in", "success", "animate__bounceIn", "animate__bounceOut"]
+        Message(info);
       })
       .catch(err => {
         switch (err.message) {
           case "Request failed with status code 401":
-            store.addNotification({
-              message: "Wrong email or password!",
-              type: "danger",
-              insert: "top",
-              container: "top-center",
-              animationIn: ["animate__animated", "animate__shakeX"],
-              animationOut: ["animate__animated", "animate__fadeOut"],
-              dismiss: {
-                duration: 1500
-              }
-            });
+            const case1 = ["Wrong email or password!", "danger", "animate__shakeX", "animate__fadeOut"]
+            Message(case1);
             break;
           case "Network Error":
-            store.addNotification({
-              message: "No internet!",
-              type: "danger",
-              insert: "top",
-              container: "top-center",
-              animationIn: ["animate__animated", "animate__shakeX"],
-              animationOut: ["animate__animated", "animate__fadeOut"],
-              dismiss: {
-                duration: 1500
-              }
-            });
+            const case2 = ["No internet!", "danger", "animate__shakeX", "animate__fadeOut"]
+            Message(case2);
             break;
-            default:
+          default:
         }
       });
   };
@@ -120,17 +79,8 @@ function Login(props) {
       imageUrl: imageUrl
     }
     if (!email || !password) {
-      store.addNotification({
-        message: "Please fill out all the required fields!",
-        type: "warning",
-        insert: "top",
-        container: "top-center",
-        animationIn: ["animate__animated", "animate__shakeX"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 1500
-        }
-      });
+      const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
+      Message(info);
       return;
     }
     await db.collection("users").doc(firstName).set({
@@ -139,31 +89,17 @@ function Login(props) {
       lastName: lastName,
       image: imageUrl,
     });
-    // console.log(user)
     API.signUp(user)
       .then(resData => {
-        // console.log(resData)
         setUserId({ id: resData.data.id })
         props.history.push("/Members")
-        store.addNotification({
-          message: "Signed-up and logged-in",
-          type: "success",
-          insert: "top",
-          container: "top-center",
-          animationIn: ["animate__animated", "animate__bounceIn"],
-          animationOut: ["animate__animated", "animate__bounceOut"],
-          dismiss: {
-            duration: 1500
-          }
-        });
+        const info = ["Signed-up and logged-in", "success", "animate__bounceIn", "animate__bounceOut"]
+        Message(info);
       })
       .catch(err => {
         console.log(err);
       })
   };
-  // const handleSignUpErr = (err) => {
-  //   alert(err);
-  // };
 
   const handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -203,8 +139,8 @@ function Login(props) {
     let myVar = setInterval(myTimer, 1000);
 
     function myTimer() {
-      if(percentage < 100){
-      setPercentage(percentage => percentage + 10);
+      if (percentage < 100) {
+        setPercentage(percentage => percentage + 10);
       } else clearInterval(myVar);
     }
     await fileRef.put(file);
@@ -232,7 +168,7 @@ function Login(props) {
           <FormInputTwo handleInputChange={handleInputChange} value={password} setWidth='width100' name='password' type='password' label='Password' id='password'></FormInputTwo>
           <FormInputTwo handleInputChange={handleInputChange} value={location} setWidth='width100' name='location' type='location' label='Location' id='location'></FormInputTwo>
           <span>
-          <label className='photoFileLabel'>Add Profile Image</label>
+            <label className='photoFileLabel'>Add Profile Image</label>
             <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
             <ImageUpload onFileChange={onFileChange} />
           </span>
