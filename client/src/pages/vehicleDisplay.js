@@ -88,7 +88,6 @@ class VehicleDisplay extends Component {
         <Navbar>
           <NavbarLink url='/members'>My Garage</NavbarLink>
           <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-          <NavbarLink url='/add-maintenance'>Add Maintenance</NavbarLink>
           <ActionBtn handleClick={this.signOut} url='/'>Sign Out</ActionBtn>
         </Navbar>
         <div className='garageWrapper'>
