@@ -58,8 +58,6 @@ export default function Members(props) {
     return null;
   }
 
-  // console.log(userVehicles);
-
   return (
     <>
       <Navbar>

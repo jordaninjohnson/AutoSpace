@@ -5,7 +5,7 @@ import 'firebase/firestore'
 
 
 export const app = firebase.initializeApp({
-    apiKey: "AIzaSyD9HUshu-g0uefFi9K0IkfQFQaa-5i4QDE",
+    apiKey: process.env.API_KEY,
     authDomain: "autospace-1234b.firebaseapp.com",
     databaseURL: "https://autospace-1234b.firebaseio.com",
     projectId: "autospace-1234b",

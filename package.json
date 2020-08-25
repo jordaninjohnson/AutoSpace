@@ -2,6 +2,9 @@
   "name": "autospace",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "12.16.2"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/BenBKnight/myAutoSpace/issues"
   },
-  "homepage": "https://github.com/BenBKnight/myAutoSpace#readme",
+  "homepage": "https://young-lake-34599.herokuapp.com/",
   "dependencies": {
     "animate.css": "^4.1.0",
     "axios": "^0.19.2",
