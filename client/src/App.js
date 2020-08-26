@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import Login from "./pages/login";
 import Members from "./pages/members";
-// import MaintRecord from "./pages/maintRecord";
 import Maintenance from "./pages/maintenance";
 import Vehicles from "./pages/vehicles";
 import VehicleDisplay from "./pages/vehicleDisplay";
@@ -25,7 +24,6 @@ export default function App() {
             <Switch>
               <Route exact path="/" component={Login} />
               <ProtectedRoute path="/Members" component={Members} />
-              {/* <ProtectedRoute path="/MaintRecord/:id" component={MaintRecord} /> */}
               <ProtectedRoute exact path="/Maintenance" component={Maintenance} />
               <ProtectedRoute exact path="/Vehicles" component={Vehicles} />
               <ProtectedRoute exact path="/NewMaintenance/:id" component={NewMaintenance} />
