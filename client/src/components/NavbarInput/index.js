@@ -3,12 +3,12 @@ import "./style.css";
 
 
 class NavbarInput extends React.Component {
-  
+
   nameProp = this.props.name;
 
   state = {
     labelClasses: 'floatingLabel',
-    name : this.props.name,
+    name: this.props.name,
     value: ''
   }
 
@@ -23,12 +23,12 @@ class NavbarInput extends React.Component {
   render() {
     return (
       <div className="navInputWrapper">
-        <input 
-          type={this.props.type} 
-          className="navInput" 
+        <input
+          type={this.props.type}
+          className="navInput"
           name={this.props.name}
-          value={this.props.value} 
-          placeholder = {this.props.label}
+          value={this.props.value}
+          placeholder={this.props.label}
           onChange={this.props.handleInputChange}
           id={this.props.id}
         />

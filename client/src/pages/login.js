@@ -13,6 +13,7 @@ import BulletPoint from '../components/BulletPoint';
 import FormInputTwo from '../components/FormInputTwo'
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
+import { Form, Button, FormControl } from "react-bootstrap";
 const db = app.firestore();
 
 function Login(props) {
@@ -150,9 +151,12 @@ function Login(props) {
   return (
     <div>
       <Navbar>
-        <NavbarInput handleInputChange={handleInputChange} value={emailInput} name='emailInput' type='emailInput' label='Username' id="emailInput" />
-        <NavbarInput handleInputChange={handleInputChange} value={passwordInput} name='passwordInput' type='password' label='Password' id="passwordInput" />
-        <ActionBtn url='#' handleClick={handleLogInSubmit}>Login</ActionBtn>
+        <div></div>
+        <Form inline onSubmit={handleLogInSubmit}>
+          <NavbarInput handleInputChange={handleInputChange} value={emailInput} name='emailInput' type='emailInput' label='Username' id="emailInput" />
+          <NavbarInput handleInputChange={handleInputChange} value={passwordInput} name='passwordInput' type='password' label='Password' id="passwordInput" />
+          <ActionBtn>Login</ActionBtn>
+        </Form>
       </Navbar>
       <h1 className='mainHeader'>MyAutoSpace</h1>
       <br></br>
@@ -172,7 +176,7 @@ function Login(props) {
             <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
             <ImageUpload onFileChange={onFileChange} />
           </span>
-          <ActionBtn url='#' handleClick={handleSignUpSubmit}>Sign Up</ActionBtn>
+          <ActionBtn handleClick={handleSignUpSubmit}>Sign Up</ActionBtn>
         </div>
 
         <div className='width40'>

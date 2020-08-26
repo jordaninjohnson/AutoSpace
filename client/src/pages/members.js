@@ -15,7 +15,7 @@ export default function Members(props) {
   const [userId, setUserId] = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({});
   const [userVehicles, setVehicle] = useState([]);
-  const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); }
+  const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function Members(props) {
       <Navbar>
         <NavbarLink url='/members' active={true}>My Garage</NavbarLink>
         <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-        <ActionBtn handleClick={signOut} url='/'>Sign Out</ActionBtn>
+        <ActionBtn handleClick={signOut}>Sign Out</ActionBtn>
       </Navbar>
       <div className='garageWrapper'>
         <div className='garageSidebar'>

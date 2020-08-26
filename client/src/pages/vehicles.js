@@ -148,7 +148,7 @@ function Vehicles(props) {
         break;
     }
   }
-  const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); }
+  const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
 
 
 
@@ -157,7 +157,7 @@ function Vehicles(props) {
       <Navbar>
         <NavbarLink url='/members'>My Garage</NavbarLink>
         <NavbarLink url='/vehicles' active={true}>Add Vehicle</NavbarLink>
-        <ActionBtn handleClick={signOut} url='/'>Sign Out</ActionBtn>
+        <ActionBtn handleClick={signOut}>Sign Out</ActionBtn>
       </Navbar>
       <div className='addCarFlex'>
         <div className='width40 carSelectionFormat'>

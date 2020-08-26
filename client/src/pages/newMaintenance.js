@@ -102,7 +102,7 @@ class NewMaintenance extends Component {
         console.log(err)
       })
   };
-  signOut = () => { localStorage.removeItem("jwt.Token") }
+  signOut = () => { localStorage.removeItem("jwt.Token"); window.location.reload(); }
 
   render() {
     return (
@@ -110,7 +110,7 @@ class NewMaintenance extends Component {
         <Navbar>
           <NavbarLink url='/members'>My Garage</NavbarLink>
           <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-          <ActionBtn handleClick={this.signOut} url='/'>Sign Out</ActionBtn>
+          <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
         </Navbar>
         <br></br>
         <br></br>

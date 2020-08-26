@@ -80,7 +80,7 @@ class VehicleDisplay extends Component {
       })
 
   };
-  signOut = () => { localStorage.removeItem("jwt.Token") }
+  signOut = () => { localStorage.removeItem("jwt.Token"); window.location.reload(); }
 
   render() {
     return (
@@ -88,7 +88,7 @@ class VehicleDisplay extends Component {
         <Navbar>
           <NavbarLink url='/members'>My Garage</NavbarLink>
           <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-          <ActionBtn handleClick={this.signOut} url='/'>Sign Out</ActionBtn>
+          <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
         </Navbar>
         <div className='garageWrapper'>
           <div className='garageSidebar'>
