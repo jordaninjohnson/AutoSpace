@@ -9,6 +9,7 @@ import FormLine from '../components/FormLine';
 import VehicleMaintBox from '../components/VehicleMaintBox';
 import VehicleOverviewBox from '../components/VehicleOverviewBox';
 import CarInfoSidebar from '../components/CarInfoSidebar';
+import VINDecoder from '../components/VINDecoder';
 
 class VehicleDisplay extends Component {
   constructor(props) {
@@ -99,7 +100,8 @@ class VehicleDisplay extends Component {
             <br></br>
             <br></br>
             <br></br>
-            <VehicleOverviewBox vehicle={this.state.vehicle} />
+            <VehicleOverviewBox title="Vehicle Overview" vehicle={this.state.vehicle} />
+            <VINDecoder vehicle={this.state.vehicle} />
             <VehicleMaintBox header='Recent Maintenance'>
               {this.state.maintRecords.map(job => (
                 <span key={job.id}>

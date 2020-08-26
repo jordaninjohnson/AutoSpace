@@ -13,7 +13,7 @@ class ActionBtn extends React.Component {
   render() {
     return (
       <Link to={this.props.url}>
-        <button className="actionBtn" onClick={this.props.handleClick}>{this.props.children}</button>
+        <button className="actionBtn level-item" onClick={this.props.handleClick}>{this.props.children}</button>
       </Link>
     );
   }
