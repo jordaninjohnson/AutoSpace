@@ -13,6 +13,7 @@ import BulletPoint from '../components/BulletPoint';
 import FormInputTwo from '../components/FormInputTwo'
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
+import { Form, Button, FormControl } from "react-bootstrap";
 const db = app.firestore();
 
 function Login(props) {
@@ -150,37 +151,42 @@ function Login(props) {
   return (
     <div>
       <Navbar>
-        <NavbarInput handleInputChange={handleInputChange} value={emailInput} name='emailInput' type='emailInput' label='Username' id="emailInput" />
-        <NavbarInput handleInputChange={handleInputChange} value={passwordInput} name='passwordInput' type='password' label='Password' id="passwordInput" />
-        <ActionBtn url='#' handleClick={handleLogInSubmit}>Login</ActionBtn>
+        <div></div>
+        <Form inline onSubmit={handleLogInSubmit}>
+          <NavbarInput handleInputChange={handleInputChange} value={emailInput} name='emailInput' type='emailInput' label='Username' id="emailInput" />
+          <NavbarInput handleInputChange={handleInputChange} value={passwordInput} name='passwordInput' type='password' label='Password' id="passwordInput" />
+          <ActionBtn handleClick={handleLogInSubmit}>Login</ActionBtn>
+        </Form>
       </Navbar>
       <h1 className='mainHeader'>MyAutoSpace</h1>
       <br></br>
-      <div className='signInFlex'>
+      <Form onSubmit={handleSignUpSubmit}>
+        <div className='signInFlex'>
 
-        <div className='signUpWrapper'>
-          <h2 className='signUpHeader'>Stay Informed, Maintain and Show off Your Automobile</h2>
-          <span className='flex'>
-            <FormInputTwo handleInputChange={handleInputChange} value={firstName} setWidth='width40' name='firstName' type='firstName' label='First Name' id='firstName'></FormInputTwo>
-            <FormInputTwo handleInputChange={handleInputChange} value={lastName} setWidth='width40' name='lastName' type='lastName' label='Last Name' id='lastName'></FormInputTwo>
-          </span>
-          <FormInputTwo handleInputChange={handleInputChange} value={email} setWidth='width100' name='email' type='email' label='Email' id='email'></FormInputTwo>
-          <FormInputTwo handleInputChange={handleInputChange} value={password} setWidth='width100' name='password' type='password' label='Password' id='password'></FormInputTwo>
-          <FormInputTwo handleInputChange={handleInputChange} value={location} setWidth='width100' name='location' type='location' label='Location' id='location'></FormInputTwo>
-          <span>
-            <label className='photoFileLabel'>Add Profile Image</label>
-            <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
-            <ImageUpload onFileChange={onFileChange} />
-          </span>
-          <ActionBtn url='#' handleClick={handleSignUpSubmit}>Sign Up</ActionBtn>
-        </div>
+          <div className='signUpWrapper'>
+            <h2 className='signUpHeader'>Stay Informed, Maintain and Show off Your Automobile</h2>
+            <span className='flex'>
+              <FormInputTwo handleInputChange={handleInputChange} value={firstName} setWidth='width40' name='firstName' type='firstName' label='First Name' id='firstName'></FormInputTwo>
+              <FormInputTwo handleInputChange={handleInputChange} value={lastName} setWidth='width40' name='lastName' type='lastName' label='Last Name' id='lastName'></FormInputTwo>
+            </span>
+            <FormInputTwo handleInputChange={handleInputChange} value={email} setWidth='width100' name='email' type='email' label='Email' id='email'></FormInputTwo>
+            <FormInputTwo handleInputChange={handleInputChange} value={password} setWidth='width100' name='password' type='password' label='Password' id='password'></FormInputTwo>
+            <FormInputTwo handleInputChange={handleInputChange} value={location} setWidth='width100' name='location' type='location' label='Location' id='location'></FormInputTwo>
+            <span>
+              <label className='photoFileLabel'>Add Profile Image</label>
+              <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
+              <ImageUpload onFileChange={onFileChange} />
+            </span>
+            <ActionBtn handleClick={handleSignUpSubmit}>Sign Up</ActionBtn>
+          </div>
 
-        <div className='width40'>
-          <BulletPoint src={require('../components/BulletPoint/img/wrenches.png')}>Keep track of the work you do on your vehicle</BulletPoint>
-          <BulletPoint src={require('../components/BulletPoint/img/speedo.png')}>See upcoming maintenance needed to maintain your vehicle</BulletPoint>
-          <BulletPoint src={require('../components/BulletPoint/img/chat.png')}>Connect with other vehicle owners and share information</BulletPoint>
+          <div className='width40'>
+            <BulletPoint src={require('../components/BulletPoint/img/wrenches.png')}>Keep track of the work you do on your vehicle</BulletPoint>
+            <BulletPoint src={require('../components/BulletPoint/img/speedo.png')}>See upcoming maintenance needed to maintain your vehicle</BulletPoint>
+            <BulletPoint src={require('../components/BulletPoint/img/chat.png')}>Connect with other vehicle owners and share information</BulletPoint>
+          </div>
         </div>
-      </div>
+      </Form>
     </div>
   );
 }

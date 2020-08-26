@@ -9,13 +9,13 @@ import NavbarLink from '../components/NavbarLink';
 import ActionBtn from '../components/ActionBtn';
 import UserInfo from '../components/UserInfo';
 import CarInfoBox from "../components/CarInfoBox"
-
+import { Form } from "react-bootstrap";
 
 export default function Members(props) {
   const [userId, setUserId] = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({});
   const [userVehicles, setVehicle] = useState([]);
-  const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); }
+  const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
@@ -40,8 +40,6 @@ export default function Members(props) {
 
     API.userData(userId.id)
       .then(res => {
-        // console.log(res);
-        // setUserInfo(res)
         setUserInfo(
           ...res.data
         )
@@ -60,9 +58,12 @@ export default function Members(props) {
   return (
     <>
       <Navbar>
-        <NavbarLink url='/members' active={true}>My Garage</NavbarLink>
-        <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-        <ActionBtn handleClick={signOut} url='/'>Sign Out</ActionBtn>
+        <div></div>
+        <Form inline>
+          <NavbarLink url='/members' active={true}>My Garage</NavbarLink>
+          <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
+          <ActionBtn handleClick={signOut}>Sign Out</ActionBtn>
+        </Form>
       </Navbar>
       <div className='garageWrapper'>
         <div className='garageSidebar'>

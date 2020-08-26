@@ -1,3 +1,4 @@
+import Message from "../components/Message";
 import React, { Component } from "react";
 import './newMaintenance.css';
 import API from "../utils/API";
@@ -9,6 +10,7 @@ import ActionBtn from '../components/ActionBtn';
 import MaintInfoBox from "../components/MaintInfoBox";
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
+import { Form } from "react-bootstrap";
 const db = app.firestore();
 
 class NewMaintenance extends Component {
@@ -54,6 +56,11 @@ class NewMaintenance extends Component {
     e.preventDefault();
     let newMaint = this.state.maintToAdd;
     newMaint.VehicleId = this.state.vehicleID;
+    if (!this.state.maintToAdd.name || !this.state.maintToAdd.milage || !this.state.maintToAdd.description || !this.state.maintToAdd.jobDate) {
+      const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
+      Message(info);
+      return;
+    }
     API.maintRecord(newMaint)
       .then((res) => {
         this.props.history.push(`/Vehicles/${this.state.maintToAdd.VehicleId}`)
@@ -102,15 +109,18 @@ class NewMaintenance extends Component {
         console.log(err)
       })
   };
-  signOut = () => { localStorage.removeItem("jwt.Token") }
+  signOut = () => { localStorage.removeItem("jwt.Token"); window.location.reload(); }
 
   render() {
     return (
       <>
         <Navbar>
-          <NavbarLink url='/members'>My Garage</NavbarLink>
-          <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-          <ActionBtn handleClick={this.signOut} url='/'>Sign Out</ActionBtn>
+          <div></div>
+          <Form inline>
+            <NavbarLink url='/members'>My Garage</NavbarLink>
+            <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
+            <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
+          </Form>
         </Navbar>
         <br></br>
         <br></br>
@@ -124,32 +134,34 @@ class NewMaintenance extends Component {
           </div>
         </div>
         <br></br>
-        <div className='maintFlex'>
-          <div className='addMaintenanceWrapper'>
-            <span>
-              <label className='photoFileLabel'>Add Photo</label>
-              <ImageUpload onFileChange={this.onFileChange} />
-            </span>
-            <FormInputTwo setWidth='width100' name='jobName' type='text' label='Job Name' id="name" value={this.state.maintToAdd.name} handleInputChange={this.handleInputChange}></FormInputTwo>
-            <FormInputTwo setWidth='width100' name='milage' type='text' label='Milage at Service' id="milage" value={this.state.maintToAdd.milage} handleInputChange={this.handleInputChange}></FormInputTwo>
-            <FormInputTwo setWidth='width100' name='jobDate' type='text' label='Service Date' id="jobDate" value={this.state.maintToAdd.jobDate} handleInputChange={this.handleInputChange}></FormInputTwo>
+        <Form>
+          <div className='maintFlex'>
+            <div className='addMaintenanceWrapper'>
+              <span>
+                <label className='photoFileLabel'>Add Photo</label>
+                <ImageUpload onFileChange={this.onFileChange} />
+              </span>
+              <FormInputTwo setWidth='width100' name='jobName' type='text' label='Job Name' id="name" value={this.state.maintToAdd.name} handleInputChange={this.handleInputChange}></FormInputTwo>
+              <FormInputTwo setWidth='width100' name='milage' type='text' label='Milage at Service' id="milage" value={this.state.maintToAdd.milage} handleInputChange={this.handleInputChange}></FormInputTwo>
+              <FormInputTwo setWidth='width100' name='jobDate' type='text' label='Service Date' id="jobDate" value={this.state.maintToAdd.jobDate} handleInputChange={this.handleInputChange}></FormInputTwo>
+            </div>
+            <div className='addMaintenanceWrapper'>
+              <textarea className='inputText textArea maintAddTextArea' placeholder='Description' name='description' type='text' label='Description' id="description" value={this.state.description} onChange={this.handleInputChange} />
+            </div>
           </div>
-          <div className='addMaintenanceWrapper'>
-            <textarea className='inputText textArea maintAddTextArea' placeholder='Description' name='description' type='text' label='Description' id="description" value={this.state.description} onChange={this.handleInputChange} />
+          <br />
+          <div className='maintFlex'>
+            <div className='addMaintenanceWrapper'>
+            </div>
+            <div className='addMaintenanceWrapper'>
+            </div>
           </div>
-        </div>
-        <br />
-        <div className='maintFlex'>
-          <div className='addMaintenanceWrapper'>
+          <br></br>
+          <br></br>
+          <div className='newMaintBtn'>
+            <ActionBtn handleClick={this.handleFormSubmit}>Add Maintenance</ActionBtn>
           </div>
-          <div className='addMaintenanceWrapper'>
-          </div>
-        </div>
-        <br></br>
-        <br></br>
-        <div className='newMaintBtn'>
-          <ActionBtn url='#' handleClick={this.handleFormSubmit}>Add Maintenance</ActionBtn>
-        </div>
+        </Form>
       </>
     );
   }
