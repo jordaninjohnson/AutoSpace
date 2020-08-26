@@ -10,6 +10,7 @@ import ActionBtn from '../components/ActionBtn';
 import FormImg from '../components/FormImg';
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
+import { Form } from "react-bootstrap";
 const db = app.firestore();
 
 function Vehicles(props) {
@@ -155,9 +156,12 @@ function Vehicles(props) {
   return (
     <>
       <Navbar>
-        <NavbarLink url='/members'>My Garage</NavbarLink>
-        <NavbarLink url='/vehicles' active={true}>Add Vehicle</NavbarLink>
-        <ActionBtn handleClick={signOut}>Sign Out</ActionBtn>
+        <div></div>
+        <Form inline>
+          <NavbarLink url='/members'>My Garage</NavbarLink>
+          <NavbarLink url='/vehicles' active={true}>Add Vehicle</NavbarLink>
+          <ActionBtn handleClick={signOut}>Sign Out</ActionBtn>
+        </Form>
       </Navbar>
       <div className='addCarFlex'>
         <div className='width40 carSelectionFormat'>
