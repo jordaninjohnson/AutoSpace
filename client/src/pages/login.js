@@ -160,10 +160,10 @@ function Login(props) {
       </Navbar>
       <h1 className='mainHeader'>MyAutoSpace</h1>
       <br></br>
-      <div className='signInFlex'>
+      <Form onSubmit={handleSignUpSubmit}>
+        <div className='signInFlex'>
 
-        <div className='signUpWrapper'>
-          <Form onSubmit={handleSignUpSubmit}>
+          <div className='signUpWrapper'>
             <h2 className='signUpHeader'>Stay Informed, Maintain and Show off Your Automobile</h2>
             <span className='flex'>
               <FormInputTwo handleInputChange={handleInputChange} value={firstName} setWidth='width40' name='firstName' type='firstName' label='First Name' id='firstName'></FormInputTwo>
@@ -178,15 +178,15 @@ function Login(props) {
               <ImageUpload onFileChange={onFileChange} />
             </span>
             <ActionBtn handleClick={handleSignUpSubmit}>Sign Up</ActionBtn>
-          </Form>
-        </div>
+          </div>
 
-        <div className='width40'>
-          <BulletPoint src={require('../components/BulletPoint/img/wrenches.png')}>Keep track of the work you do on your vehicle</BulletPoint>
-          <BulletPoint src={require('../components/BulletPoint/img/speedo.png')}>See upcoming maintenance needed to maintain your vehicle</BulletPoint>
-          <BulletPoint src={require('../components/BulletPoint/img/chat.png')}>Connect with other vehicle owners and share information</BulletPoint>
+          <div className='width40'>
+            <BulletPoint src={require('../components/BulletPoint/img/wrenches.png')}>Keep track of the work you do on your vehicle</BulletPoint>
+            <BulletPoint src={require('../components/BulletPoint/img/speedo.png')}>See upcoming maintenance needed to maintain your vehicle</BulletPoint>
+            <BulletPoint src={require('../components/BulletPoint/img/chat.png')}>Connect with other vehicle owners and share information</BulletPoint>
+          </div>
         </div>
-      </div>
+      </Form>
     </div>
   );
 }
