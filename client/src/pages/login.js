@@ -155,7 +155,7 @@ function Login(props) {
         <Form inline onSubmit={handleLogInSubmit}>
           <NavbarInput handleInputChange={handleInputChange} value={emailInput} name='emailInput' type='emailInput' label='Username' id="emailInput" />
           <NavbarInput handleInputChange={handleInputChange} value={passwordInput} name='passwordInput' type='password' label='Password' id="passwordInput" />
-          <ActionBtn>Login</ActionBtn>
+          <ActionBtn handleClick={handleLogInSubmit}>Login</ActionBtn>
         </Form>
       </Navbar>
       <h1 className='mainHeader'>MyAutoSpace</h1>
@@ -163,20 +163,22 @@ function Login(props) {
       <div className='signInFlex'>
 
         <div className='signUpWrapper'>
-          <h2 className='signUpHeader'>Stay Informed, Maintain and Show off Your Automobile</h2>
-          <span className='flex'>
-            <FormInputTwo handleInputChange={handleInputChange} value={firstName} setWidth='width40' name='firstName' type='firstName' label='First Name' id='firstName'></FormInputTwo>
-            <FormInputTwo handleInputChange={handleInputChange} value={lastName} setWidth='width40' name='lastName' type='lastName' label='Last Name' id='lastName'></FormInputTwo>
-          </span>
-          <FormInputTwo handleInputChange={handleInputChange} value={email} setWidth='width100' name='email' type='email' label='Email' id='email'></FormInputTwo>
-          <FormInputTwo handleInputChange={handleInputChange} value={password} setWidth='width100' name='password' type='password' label='Password' id='password'></FormInputTwo>
-          <FormInputTwo handleInputChange={handleInputChange} value={location} setWidth='width100' name='location' type='location' label='Location' id='location'></FormInputTwo>
-          <span>
-            <label className='photoFileLabel'>Add Profile Image</label>
-            <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
-            <ImageUpload onFileChange={onFileChange} />
-          </span>
-          <ActionBtn handleClick={handleSignUpSubmit}>Sign Up</ActionBtn>
+          <Form onSubmit={handleSignUpSubmit}>
+            <h2 className='signUpHeader'>Stay Informed, Maintain and Show off Your Automobile</h2>
+            <span className='flex'>
+              <FormInputTwo handleInputChange={handleInputChange} value={firstName} setWidth='width40' name='firstName' type='firstName' label='First Name' id='firstName'></FormInputTwo>
+              <FormInputTwo handleInputChange={handleInputChange} value={lastName} setWidth='width40' name='lastName' type='lastName' label='Last Name' id='lastName'></FormInputTwo>
+            </span>
+            <FormInputTwo handleInputChange={handleInputChange} value={email} setWidth='width100' name='email' type='email' label='Email' id='email'></FormInputTwo>
+            <FormInputTwo handleInputChange={handleInputChange} value={password} setWidth='width100' name='password' type='password' label='Password' id='password'></FormInputTwo>
+            <FormInputTwo handleInputChange={handleInputChange} value={location} setWidth='width100' name='location' type='location' label='Location' id='location'></FormInputTwo>
+            <span>
+              <label className='photoFileLabel'>Add Profile Image</label>
+              <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
+              <ImageUpload onFileChange={onFileChange} />
+            </span>
+            <ActionBtn handleClick={handleSignUpSubmit}>Sign Up</ActionBtn>
+          </Form>
         </div>
 
         <div className='width40'>
