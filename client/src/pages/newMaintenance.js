@@ -115,9 +115,12 @@ class NewMaintenance extends Component {
     return (
       <>
         <Navbar>
-          <NavbarLink url='/members'>My Garage</NavbarLink>
-          <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-          <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
+          <div></div>
+          <Form inline>
+            <NavbarLink url='/members'>My Garage</NavbarLink>
+            <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
+            <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
+          </Form>
         </Navbar>
         <br></br>
         <br></br>
