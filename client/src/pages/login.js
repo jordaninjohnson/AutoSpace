@@ -3,9 +3,7 @@ import React from "react";
 import './login.css';
 import API from "../utils/API";
 import { withRouter } from "react-router-dom";
-import { AuthContext } from "../utils/authContext";
 import { useState } from "react";
-import { useContext } from "react";
 import Navbar from '../components/Navbar copy';
 import NavbarInput from '../components/NavbarInput';
 import ActionBtn from '../components/ActionBtn';
@@ -13,7 +11,7 @@ import BulletPoint from '../components/BulletPoint';
 import FormInputTwo from '../components/FormInputTwo'
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
 const db = app.firestore();
 
 function Login(props) {
@@ -21,12 +19,14 @@ function Login(props) {
   const [passwordInput, setPasswordInput] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useContext(AuthContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [location, setLocation] = useState("");
   const [imageUrl, setImageUrl] = React.useState(null);
-  const [percentage, setPercentage] = useState(0);
+
+  const [spinner, setSpinner] = useState("d-none");
+  const [disable, setDisable] = useState("");
+  const [signup, setSignup] = useState("Sign Up");
 
   const handleLogInSubmit = (e) => {
     e.preventDefault();
@@ -124,18 +124,20 @@ function Login(props) {
   };
 
   const onFileChange = async (e) => {
+    console.log("uploading...");
+    setDisable("true");
+    setSpinner("");
+    setSignup("Uploading...");
     const file = e.target.files[0];
     const storageRef = app.storage().ref();
     const fileRef = storageRef.child(file.name);
-    let myVar = setInterval(myTimer, 1000);
 
-    function myTimer() {
-      if (percentage < 100) {
-        setPercentage(percentage => percentage + 10);
-      } else clearInterval(myVar);
-    }
     await fileRef.put(file);
     setImageUrl(await fileRef.getDownloadURL());
+    console.log("complete");
+    setDisable("");
+    setSpinner("d-none");
+    setSignup("Sign Up");
   }
 
   return (
@@ -164,10 +166,9 @@ function Login(props) {
             <FormInputTwo handleInputChange={handleInputChange} value={location} setWidth='width100' name='location' type='location' label='Location' id='location'></FormInputTwo>
             <span>
               <label className='photoFileLabel'>Add Profile Image</label>
-              <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
               <ImageUpload onFileChange={onFileChange} />
             </span>
-            <ActionBtn handleClick={handleSignUpSubmit}>Sign Up</ActionBtn>
+            <ActionBtn handleClick={handleSignUpSubmit} disabled={disable}>{signup}<Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" className={spinner} /></ActionBtn>
           </div>
 
           <div className='width40'>
