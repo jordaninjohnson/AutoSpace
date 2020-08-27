@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import { AuthContext } from "./authContext";
 
 export default function ProtectedRoute({ component: Component, ...rest }) {
-    // took out SetUserId : never used
     const [useId] = useContext(AuthContext)
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     useEffect(() => {
