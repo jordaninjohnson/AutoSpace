@@ -59,7 +59,7 @@ class MaintRecord extends Component {
                     <Form inline>
                         <NavbarLink url='/Members'>My Garage</NavbarLink>
                         <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-                        <ActionBtn handleClick={this.signOut} url='/'>Sign Out</ActionBtn>
+                        <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
                     </Form>
                 </Navbar>
                 <div className='garageWrapper'>
