@@ -26,13 +26,12 @@ export default function Members(props) {
           ...userVehicles,
           ...res.data
         ])
-        console.log(res.data[0])
         if (Notification.permission === "granted" && userId.showNotification === true) {
           // navigator.serviceWorker.getRegistration().then(reg => {
           //   reg.showNotification("You have " + res.data.length + " vehicles in your garage.");
           // });
           console.log("my notification");
-          setUserId({ ...userId, showNotification: false });
+          setUserId({ showNotification: false });
         }
       })
       .catch(err => {
