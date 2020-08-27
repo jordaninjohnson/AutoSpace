@@ -10,7 +10,7 @@ import ActionBtn from '../components/ActionBtn';
 import FormImg from '../components/FormImg';
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
 const db = app.firestore();
 
 function Vehicles(props) {
@@ -23,7 +23,11 @@ function Vehicles(props) {
   const [accidents, setAccidents] = useState("");
   const [locationLastOwned, setLocationLastOwned] = useState("");
   const [imageUrl, setImageUrl] = React.useState(null);
-  const [percentage, setPercentage] = useState(0);
+
+  const [spinner, setSpinner] = useState("d-none");
+  const [disable, setDisable] = useState("");
+  const [button, setButton] = useState("Add Vehicle");
+
 
   const [activeType, setActiveType] = useState({
     car: true,
@@ -45,7 +49,7 @@ function Vehicles(props) {
   });
   const [vehicleOwners, setVehicleOwners] = useState(2);
 
-  const [userId, setUserId] = useContext(AuthContext);
+  const [setUserId] = useContext(AuthContext);
 
   const handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -85,7 +89,7 @@ function Vehicles(props) {
       accidents: accidents,
       numOfOwners: vehicleOwners,
       locationLastOwned: locationLastOwned,
-      UserId: userId.id,
+      UserId: JSON.parse(localStorage.getItem("jwt.Token")).id,
       imageUrl: imageUrl
     };
     if (imageUrl !== null) {
@@ -99,7 +103,7 @@ function Vehicles(props) {
     }
     API.newVehicle(vehicleNew)
       .then(() => {
-        setUserId({ ...userId, showNotification: true });
+        setUserId({ showNotification: true });
         props.history.push("/Members");
         const info = ["Added new vehicle.", "success", "animate__bounceIn", "animate__bounceOut"]
         Message(info);
@@ -111,18 +115,19 @@ function Vehicles(props) {
   };
 
   const onFileChange = async (e) => {
+    console.log("uploading...");
+    setDisable("true");
+    setSpinner("");
+    setButton("Uploading...");
     const file = e.target.files[0];
     const storageRef = app.storage().ref();
     const fileRef = storageRef.child(file.name);
-    let myVar = setInterval(myTimer, 1000);
-
-    function myTimer() {
-      if (percentage < 100) {
-        setPercentage(percentage => percentage + 10);
-      } else clearInterval(myVar);
-    }
     await fileRef.put(file);
     setImageUrl(await fileRef.getDownloadURL());
+    console.log("complete");
+    setDisable("");
+    setSpinner("d-none");
+    setButton("Add Vehicle");
   }
 
 
@@ -149,7 +154,7 @@ function Vehicles(props) {
         break;
     }
   }
-  const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
+  const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
 
 
 
@@ -207,10 +212,9 @@ function Vehicles(props) {
             </span>
             <span>
               <label className='photoFileLabel'>Add Photo</label>
-              <progress className="progress is-link" value={percentage} max="100">{percentage}%</progress>
               <ImageUpload onFileChange={onFileChange} />
             </span>
-            <ActionBtn url='#' handleClick={handleFormSubmit}>Add Vehicle</ActionBtn>
+            <ActionBtn handleClick={handleFormSubmit} disabled={disable}>{button}<Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" className={spinner} /></ActionBtn>
           </div>
         </div>
       </Form>

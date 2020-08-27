@@ -15,12 +15,12 @@ export default function Members(props) {
   const [userId, setUserId] = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({});
   const [userVehicles, setVehicle] = useState([]);
-  const signOut = () => { setUserId({ ...userId, showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
+  const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); }
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
     setDidMount(true);
-    API.allVehicles(userId.id)
+    API.allVehicles(JSON.parse(localStorage.getItem("jwt.Token")).id)
       .then(res => {
         setVehicle([
           ...userVehicles,
@@ -31,14 +31,14 @@ export default function Members(props) {
           //   reg.showNotification("You have " + res.data.length + " vehicles in your garage.");
           // });
           console.log("my notification");
-          // setUserId({ ...userId, showNotification: false });
+          setUserId({ showNotification: false });
         }
       })
       .catch(err => {
         console.log(err);
       });
 
-    API.userData(userId.id)
+    API.userData(JSON.parse(localStorage.getItem("jwt.Token")).id)
       .then(res => {
         setUserInfo(
           ...res.data

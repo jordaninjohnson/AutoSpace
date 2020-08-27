@@ -11,7 +11,7 @@ class ActionBtn extends React.Component {
 
   render() {
     return (
-      <button className="actionBtn" onClick={this.props.handleClick} type="submit">{this.props.children}</button>
+      <button className="actionBtn" onClick={this.props.handleClick} type="submit" disabled={this.props.disabled}>{this.props.children}</button>
     );
   }
 }

@@ -10,7 +10,7 @@ import ActionBtn from '../components/ActionBtn';
 import MaintInfoBox from "../components/MaintInfoBox";
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
 const db = app.firestore();
 
 class NewMaintenance extends Component {
@@ -25,12 +25,15 @@ class NewMaintenance extends Component {
         parts: "",
         jobDate: "",
         imageUrl: '',
-        VehicleId: localStorage.getItem("vehicleId")
+        VehicleId: ""
       },
       year: "",
       day: "",
       month: "",
-      vehicle: []
+      vehicle: [],
+      button: "Add Maintenance",
+      disable: "",
+      spinner: "d-none"
     };
   };
   handleInputChange = event => {
@@ -43,7 +46,6 @@ class NewMaintenance extends Component {
         [name]: value
       }
     });
-    console.log(this.state.maintToAdd.jobDate);
   };
   handleSelect = event => {
     let value = event.target.value;
@@ -75,6 +77,14 @@ class NewMaintenance extends Component {
   };
 
   onFileChange = async (e) => {
+
+    console.log("uploading...");
+    this.setState({
+      disable: "true",
+      button: "Uploading...",
+      spinner: ""
+    });
+
     const file = e.target.files[0];
     const storageRef = app.storage().ref();
     const fileRef = storageRef.child(file.name);
@@ -88,10 +98,17 @@ class NewMaintenance extends Component {
         imageUrl: fileRefDownloadUrl,
       }
     }));
+    this.setState({
+      disable: "",
+      button: "Add Maintenance",
+      spinner: "d-none"
+    });
+    console.log("complete");
   }
 
   componentDidMount() {
     let location = this.props.match.params.id;
+    console.log(location)
     this.setState({
       vehicleID: location
     }, () => {
@@ -170,7 +187,7 @@ class NewMaintenance extends Component {
           <br></br>
           <br></br>
           <div className='newMaintBtn'>
-            <ActionBtn handleClick={this.handleFormSubmit}>Add Maintenance</ActionBtn>
+            <ActionBtn handleClick={this.handleFormSubmit} disabled={this.state.disable}>{this.state.button}<Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" className={this.state.spinner} /></ActionBtn>
           </div>
         </Form>
       </>
