@@ -40,16 +40,7 @@ function Login(props) {
       return;
     }
     API.loginUser(user)
-      .then(resData => {
-        console.log(resData.data)
-        setUserId({
-          ...userId,
-          id: resData.data.id,
-          firstName: resData.data.firstName,
-          lastName: resData.data.lastName,
-          token: resData.data.token,
-          imageUrl: imageUrl
-        })
+      .then(() => {
         props.history.push("/Members");
         const info = ["Logged-in", "success", "animate__bounceIn", "animate__bounceOut"]
         Message(info);
@@ -91,8 +82,7 @@ function Login(props) {
       image: imageUrl,
     });
     API.signUp(user)
-      .then(resData => {
-        setUserId({ id: resData.data.id })
+      .then(() => {
         props.history.push("/Members")
         const info = ["Signed-up and logged-in", "success", "animate__bounceIn", "animate__bounceOut"]
         Message(info);

@@ -19,7 +19,6 @@ export default function Members(props) {
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
-    console.log(JSON.parse(localStorage.getItem("jwt.Token")).id);
     setDidMount(true);
     API.allVehicles(JSON.parse(localStorage.getItem("jwt.Token")).id)
       .then(res => {
@@ -32,14 +31,14 @@ export default function Members(props) {
           //   reg.showNotification("You have " + res.data.length + " vehicles in your garage.");
           // });
           console.log("my notification");
-          // setUserId({ ...userId, showNotification: false });
+          setUserId({ ...userId, showNotification: false });
         }
       })
       .catch(err => {
         console.log(err);
       });
 
-    API.userData(userId.id)
+    API.userData(JSON.parse(localStorage.getItem("jwt.Token")).id)
       .then(res => {
         setUserInfo(
           ...res.data

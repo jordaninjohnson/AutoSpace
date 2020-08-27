@@ -13,21 +13,16 @@ export default {
     loginUser: function (user) {
         return axios.post(serverUrl + "/api/login", user)
             .then(res => {
-                console.log(res.data);
-                const token = res.data.token;
                 localStorage.setItem("jwt.Token", JSON.stringify(res.data));
-                // localStorage.setItem("jwt.Token", res.data.token);
-                setAuthorizationToken(token);
+                setAuthorizationToken(res.data.token);
                 return res;
             });
     },
     signUp: function (data) {
         return axios.post(serverUrl + "/api/signup", data)
             .then(res => {
-                // console.log(res)
-                const token = res.data.token;
-                localStorage.setItem("jwt.Token", token);
-                setAuthorizationToken(token);
+                localStorage.setItem("jwt.Token", JSON.stringify(res.data));
+                setAuthorizationToken(res.data.token);
                 return res;
             });
     },
