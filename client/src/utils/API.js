@@ -51,7 +51,7 @@ export default {
         // Data is equal to user Id
         return axios.get(serverUrl + "/vehiclefind/" + data, {
             headers: {
-                Authorization: localStorage.getItem("jwt.Token")
+                Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         }).then(res => {
             // console.log(res)

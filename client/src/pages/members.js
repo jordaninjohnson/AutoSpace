@@ -19,9 +19,9 @@ export default function Members(props) {
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
-    console.log(userInfo);
+    console.log(JSON.parse(localStorage.getItem("jwt.Token")).id);
     setDidMount(true);
-    API.allVehicles(userId.id)
+    API.allVehicles(JSON.parse(localStorage.getItem("jwt.Token")).id)
       .then(res => {
         setVehicle([
           ...userVehicles,
