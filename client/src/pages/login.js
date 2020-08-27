@@ -13,7 +13,7 @@ import BulletPoint from '../components/BulletPoint';
 import FormInputTwo from '../components/FormInputTwo'
 import ImageUpload from '../components/imageUpload/imageUpload';
 import { app } from "../utils/base";
-import { Form, Button, FormControl } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 const db = app.firestore();
 
 function Login(props) {
