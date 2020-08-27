@@ -41,7 +41,7 @@ function Login(props) {
     }
     API.loginUser(user)
       .then(resData => {
-        // console.log(resData.data)
+        console.log(resData.data)
         setUserId({
           ...userId,
           id: resData.data.id,

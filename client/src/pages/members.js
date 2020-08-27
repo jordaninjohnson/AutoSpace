@@ -19,6 +19,7 @@ export default function Members(props) {
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
+    console.log(userInfo);
     setDidMount(true);
     API.allVehicles(userId.id)
       .then(res => {

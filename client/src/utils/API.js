@@ -13,9 +13,10 @@ export default {
     loginUser: function (user) {
         return axios.post(serverUrl + "/api/login", user)
             .then(res => {
-                // console.log(res);
+                console.log(res.data);
                 const token = res.data.token;
-                localStorage.setItem("jwt.Token", token);
+                localStorage.setItem("jwt.Token", JSON.stringify(res.data));
+                // localStorage.setItem("jwt.Token", res.data.token);
                 setAuthorizationToken(token);
                 return res;
             });
