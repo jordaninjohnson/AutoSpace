@@ -81,6 +81,11 @@ class VehicleDisplay extends Component {
       })
 
   };
+
+  vinSubmit = (e) => {
+    // console.log(e);
+    console.log('hit vinSubmit');
+  }
   signOut = () => { localStorage.removeItem("jwt.Token") }
 
   render() {
@@ -101,7 +106,7 @@ class VehicleDisplay extends Component {
             <br></br>
             <br></br>
             <VehicleOverviewBox title="Vehicle Overview" vehicle={this.state.vehicle} />
-            <VINDecoder vehicle={this.state.vehicle} />
+            <VINDecoder vehicle={this.state.vehicle} onSubmit={this.vinSubmit} />
             <VehicleMaintBox header='Recent Maintenance'>
               {this.state.maintRecords.map(job => (
                 <span key={job.id}>

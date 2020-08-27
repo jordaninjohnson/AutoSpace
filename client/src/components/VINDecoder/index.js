@@ -18,11 +18,11 @@ return (
         <p className='vehicleBoxText'>VIN: {props.vehicle.vin}</p>
     </div>
     <div>
-    <button class="button is-primary level-item">Request VIN Information</button>
+    <button onClick={props.onSubmit} class="button is-primary level-item">Request VIN Information</button>
     </div>    
     </span>
     </div>
-  );
+);
 }
 
 export default VINDecoder;
