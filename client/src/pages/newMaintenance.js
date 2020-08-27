@@ -43,6 +43,7 @@ class NewMaintenance extends Component {
         [name]: value
       }
     });
+    console.log(this.state.maintToAdd.jobDate);
   };
   handleSelect = event => {
     let value = event.target.value;
@@ -143,7 +144,17 @@ class NewMaintenance extends Component {
               </span>
               <FormInputTwo setWidth='width100' name='jobName' type='text' label='Job Name' id="name" value={this.state.maintToAdd.name} handleInputChange={this.handleInputChange}></FormInputTwo>
               <FormInputTwo setWidth='width100' name='milage' type='text' label='Milage at Service' id="milage" value={this.state.maintToAdd.milage} handleInputChange={this.handleInputChange}></FormInputTwo>
-              <FormInputTwo setWidth='width100' name='jobDate' type='text' label='Service Date' id="jobDate" value={this.state.maintToAdd.jobDate} handleInputChange={this.handleInputChange}></FormInputTwo>
+              <div className="width100">
+                <span className="floatingLabelFocus">Service Date</span>
+                <input
+                  type="date"
+                  className="inputText"
+                  name="jobDate"
+                  value={this.state.maintToAdd.jobDate}
+                  onChange={this.handleInputChange}
+                  id="jobDate"
+                />
+              </div>
             </div>
             <div className='addMaintenanceWrapper'>
               <textarea className='inputText textArea maintAddTextArea' placeholder='Description' name='description' type='text' label='Description' id="description" value={this.state.description} onChange={this.handleInputChange} />
