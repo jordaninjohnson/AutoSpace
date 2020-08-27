@@ -15,7 +15,12 @@ return (
     <br></br>
     <span className='vehicleBoxMoreInfo'>
     <div>
-        <p className='vehicleBoxText'>VIN: {props.vehicle.vin}</p>
+        <p className='vehicleBoxText'>Year: {props.carmdVinData.year}</p>
+        <p className='vehicleBoxText'>Make: {props.carmdVinData.make}</p>
+        <p className='vehicleBoxText'>Model: {props.carmdVinData.model}</p>
+        <p className='vehicleBoxText'>Trim: {props.carmdVinData.trim}</p>
+        <p className='vehicleBoxText'>Engine: {props.carmdVinData.engine}</p>
+        <p className='vehicleBoxText'>Transmission: {props.carmdVinData.transmission}</p>
     </div>
     <div>
     <button onClick={props.onSubmit} class="button is-primary level-item">Request VIN Information</button>
