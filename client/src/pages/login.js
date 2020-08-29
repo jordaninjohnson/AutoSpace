@@ -48,7 +48,7 @@ function Login(props) {
       .catch(err => {
         switch (err.message) {
           case "Request failed with status code 401":
-            const case1 = ["Wrong email or password!", "danger", "animate__shakeX", "animate__fadeOut"]
+            const case1 = [err.response.data.message, "danger", "animate__shakeX", "animate__fadeOut"]
             Message(case1);
             break;
           case "Network Error":
@@ -70,7 +70,7 @@ function Login(props) {
       location: location.trim(),
       imageUrl: imageUrl
     }
-    if (!email || !password) {
+    if (!email || !password || !firstName || !lastName || !location) {
       const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
       Message(info);
       return;
@@ -88,7 +88,13 @@ function Login(props) {
         Message(info);
       })
       .catch(err => {
-        console.log(err);
+        if (err.message === "Request failed with status code 500") {
+          const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"]
+          Message(info);
+        } else {
+          const info = [err.response.data.message, "danger", "animate__shakeX", "animate__fadeOut"]
+          Message(info);
+        }
       })
   };
 
