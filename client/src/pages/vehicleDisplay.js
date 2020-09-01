@@ -9,12 +9,22 @@ import FormLine from '../components/FormLine';
 import VehicleMaintBox from '../components/VehicleMaintBox';
 import VehicleOverviewBox from '../components/VehicleOverviewBox';
 import CarInfoSidebar from '../components/CarInfoSidebar';
+import VINDecoder from '../components/VINDecoder';
+import axios from 'axios'
 import { Form } from "react-bootstrap";
 
 class VehicleDisplay extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      carmdVinData: {
+        year:'?',
+        make:'?',
+        model:'?',
+        engine:'?',
+        trim:'?',
+        transmission:'?',
+      },
       vehicleID: "",
       vehicle: {},
       conditionDescription: "",
@@ -81,7 +91,25 @@ class VehicleDisplay extends Component {
       })
 
   };
-  signOut = () => { localStorage.removeItem("jwt.Token"); }
+
+  vinSubmit = (e) => {
+    // jf1gd29622g513305 -- real vin for testing;
+    // this.state.vehicle.vin   how to access vin user entered
+    axios.get('http://api.carmd.com/v3.0/decode?vin=' + this.state.vehicle.vin,{
+      headers:{
+        "content-type":"application/json",
+        Authorization :"Basic OTZlYzhiZTEtZjIwZi00YWM0LWEyODAtZGI2NDliZGVkMmU5",
+        "partner-token":"026c5798aa9642848403cec554d316a2"
+      }
+    }).then(response => {
+      // console.log(response);
+      this.setState({
+        ...this.state,
+        carmdVinData: response.data.data
+      })
+    });
+  }
+  signOut = () => { localStorage.removeItem("jwt.Token") }
 
   render() {
     return (
@@ -103,7 +131,8 @@ class VehicleDisplay extends Component {
             <br></br>
             <br></br>
             <br></br>
-            <VehicleOverviewBox vehicle={this.state.vehicle} />
+            <VehicleOverviewBox title="Vehicle Overview" vehicle={this.state.vehicle} />
+            <VINDecoder vehicle={this.state.vehicle} onSubmit={this.vinSubmit} carmdVinData={this.state.carmdVinData} />
             <VehicleMaintBox header='Recent Maintenance'>
               {this.state.maintRecords.map(job => (
                 <span key={job.id}>

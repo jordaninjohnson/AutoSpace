@@ -28,6 +28,7 @@ class FormInputTwo extends React.Component {
           type={this.props.type} 
           className="inputText"
           name={this.props.name}
+          placeholder={this.props.placeholder}
           value={this.props.value} 
           onFocus={this.toggleFocus} 
           onBlur={this.toggleFocus}

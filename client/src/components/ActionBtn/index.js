@@ -11,7 +11,9 @@ class ActionBtn extends React.Component {
 
   render() {
     return (
-      <button className="actionBtn" onClick={this.props.handleClick} type="submit" disabled={this.props.disabled}>{this.props.children}</button>
+      <Link to={this.props.url}>
+        <button className="actionBtn level-item" onClick={this.props.handleClick}>{this.props.children}</button>
+      </Link>
     );
   }
 }
