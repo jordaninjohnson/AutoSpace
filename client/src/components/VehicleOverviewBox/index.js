@@ -11,7 +11,6 @@ function VehicleOverviewBox(props) {
       <br></br>
       <span className='vehicleBoxMoreInfo'>
       <div>
-        <p className='vehicleBoxText'>Last Oil Change: {props.vehicle.mileage}</p>
         <p className='vehicleBoxText'>Condition: {props.vehicle.condition}</p>
         <p className='vehicleBoxText'>Accidents: {props.vehicle.accidents}</p>
       </div>
