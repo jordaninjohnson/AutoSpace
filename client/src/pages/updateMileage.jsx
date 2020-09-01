@@ -15,7 +15,7 @@ export default function Mileage(props) {
     const [userVehicle, setVehicle] = useState({});
     const [mileage, setMileage] = useState();
 
-    const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); }
+    const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
 
     useEffect(() => {
         API
