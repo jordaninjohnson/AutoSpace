@@ -48,7 +48,7 @@ router.post("/api/login", (req, res) => {
           message: "Wrong password!"
         })
       })
-    }).catch(err => { res.status(401).send({ message: "User not found!" }); });
+    }).catch(() => { res.status(401).send({ message: "User not found!" }); });
 })
 
 

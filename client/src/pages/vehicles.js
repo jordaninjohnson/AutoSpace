@@ -13,7 +13,7 @@ import { app } from "../utils/base";
 import { Form, Spinner } from "react-bootstrap";
 const db = app.firestore();
 
-function Vehicles(props) {
+export default function Vehicles(props) {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
@@ -50,6 +50,8 @@ function Vehicles(props) {
   const [vehicleOwners, setVehicleOwners] = useState(2);
 
   const [setUserId] = useContext(AuthContext);
+
+  const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); }
 
   const handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -154,9 +156,6 @@ function Vehicles(props) {
         break;
     }
   }
-  const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
-
-
 
   return (
     <>
@@ -221,37 +220,3 @@ function Vehicles(props) {
     </>
   );
 }
-export default Vehicles;
-
-
-
-
-// Ben Note --
-// This is information that I could not reimpliment that has to do with styling. 
-// I will be working with this later
-
-  // const handleSelect = event => {
-  //   let value = event.target.value;
-  //   const name = event.target.id;
-  //   setState({
-  //     [name]: value
-  //   });
-  // };
-  // const choiceValue = e.target.dataset.value;
-
-
-
-      // one: false,
-    // two: true,
-    // three: false,
-    // more: false
-
-
-        // car: true,
-    // truck: false,
-    // bike: false
-
-
-        // good: true,
-    // fair: false,
-    // poor: false
