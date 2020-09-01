@@ -86,7 +86,9 @@ class MaintRecord extends Component {
                             <Link to={`/vehicles/${this.state.data.VehicleId}`}>
                                 <p className='vehicleBoxLink'>Back to Vehicle</p>
                             </Link>
-                            <p className='vehicleBoxLink'>Update Milage</p>
+                            <Link to={`/vehiclesMileage/${this.state.data.VehicleId}`}>
+                                <p className='vehicleBoxLink'>Update Mileage</p>
+                            </Link>
                             <Link to={`/NewMaintenance/${this.state.data.VehicleId}`}>
                                 <p className='carBoxLink'>New Maintenance</p>
                             </Link>

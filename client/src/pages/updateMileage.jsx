@@ -6,13 +6,10 @@ import { useEffect } from "react";
 import Navbar from '../components/Navbar copy';
 import NavbarLink from '../components/NavbarLink';
 import ActionBtn from '../components/ActionBtn';
-import UserInfo from '../components/UserInfo';
-import CarInfoBox from "../components/CarInfoBox"
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import FormInputTwo from "../components/FormInputTwo";
 
-export default function Members(props) {
+export default function Mileage(props) {
     const [setUserId] = useContext(AuthContext);
     const [userVehicle, setVehicle] = useState({});
     const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); }
@@ -38,7 +35,7 @@ export default function Members(props) {
                 <div className='garageSidebar'>
                 </div>
                 <div className='garageMain'>
-                    <h1 className='garagePageTitle'>Update milage</h1>
+                    <h1 className='garagePageTitle'>Update mileage</h1>
                     <br></br>
                     <br></br>
                     <br></br>
@@ -47,9 +44,9 @@ export default function Members(props) {
                             <img className='carBoxImg' src={userVehicle.imageUrl} alt='Vehicle' />
                             <div>
                                 <h2 className='carBoxTitle'>{userVehicle.year} {userVehicle.make} {userVehicle.model}</h2>
-                                <p className='carBoxText'>Current Milage: {userVehicle.mileage}</p>
+                                <p className='carBoxText'>Current Mileage: {userVehicle.mileage}</p>
                                 <p className='carBoxText'>Vin: {userVehicle.vin}</p>
-                                <FormInputTwo setWidth='width65' name='Milage' type='number' label='New Milage' id="year"></FormInputTwo>
+                                <FormInputTwo setWidth='width65' name='Mileage' type='number' label='New Mileage' id="year"></FormInputTwo>
                             </div>
                         </span>
                         <br></br>
@@ -59,9 +56,7 @@ export default function Members(props) {
                                 <p className='carBoxText'>Accidents: {userVehicle.accidents}</p>
                             </div>
                             <div className='carBoxLinkContainer'>
-                                <Link to={`/NewMaintenance/${userVehicle.id}`}>
-                                    <p className='carBoxLink'>Save</p>
-                                </Link>
+                                <p className='carBoxLink'>Save</p>
                             </div>
                         </span>
                     </div>

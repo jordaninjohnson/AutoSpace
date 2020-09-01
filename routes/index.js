@@ -6,6 +6,7 @@ const signUp = require("./signup");
 const member = require("./member");
 const maintenance = require("./maintenance");
 const vehicle = require("./vehicle");
+const updateMileage = require("./updateMileage");
 
 
 router.use(login);
@@ -13,5 +14,6 @@ router.use(signUp);
 router.use(member);
 router.use(maintenance);
 router.use(vehicle);
+router.use(updateMileage);
 
 module.exports = router;
