@@ -11,6 +11,7 @@ import NewMaintenance from "./pages/newMaintenance";
 import ReactNotification from "react-notifications-component";
 import { AuthProvider } from "./utils/authContext";
 import ProtectedRoute from './utils/protectedRoute';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   useEffect(() => {

@@ -5,9 +5,8 @@ import { withRouter, Link } from "react-router-dom";
 import Navbar from '../components/Navbar copy';
 import NavbarLink from '../components/NavbarLink';
 import ActionBtn from '../components/ActionBtn';
-// import FormLine from '../components/FormLine';
 import VehicleMaintBox from '../components/VehicleMaintBox';
-
+import { Form } from "react-bootstrap";
 
 class MaintRecord extends Component {
     constructor(props) {
@@ -56,10 +55,12 @@ class MaintRecord extends Component {
         return (
             <>
                 <Navbar>
-                    <NavbarLink url='/Members'>My Garage</NavbarLink>
-                    <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-                    <NavbarLink url='/add-maintenance'>Add Maintenance</NavbarLink>
-                    <ActionBtn handleClick={this.signOut} url='/'>Sign Out</ActionBtn>
+                    <div></div>
+                    <Form inline>
+                        <NavbarLink url='/Members'>My Garage</NavbarLink>
+                        <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
+                        <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
+                    </Form>
                 </Navbar>
                 <div className='garageWrapper'>
                     <div className='garageSidebar'>
@@ -67,7 +68,7 @@ class MaintRecord extends Component {
                     </div>
                     <div className='garageMain'>
                         {/* <h1 className='garagePageTitle'></h1> */}
-                        <img className='' src={this.state.data.imageUrl} alt='Maintenance'/>
+                        <img className='' src={this.state.data.imageUrl} alt='Maintenance' />
                         <br></br>
                         <br></br>
                         <br></br>

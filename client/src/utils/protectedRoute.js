@@ -4,11 +4,15 @@ import jwt from "jsonwebtoken";
 import { AuthContext } from "./authContext";
 
 export default function ProtectedRoute({ component: Component, ...rest }) {
-    // took out SetUserId : never used
     const [useId] = useContext(AuthContext)
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     useEffect(() => {
-        let token = localStorage.getItem("jwt.Token");
+        let token;
+        if (JSON.parse(localStorage.getItem("jwt.Token")) === null) {
+            token = null;
+        } else {
+            token = JSON.parse(localStorage.getItem("jwt.Token")).token;
+        }
         if (token) {
             let expirationDate = jwt.decode(token).exp;
             let newDate = new Date();

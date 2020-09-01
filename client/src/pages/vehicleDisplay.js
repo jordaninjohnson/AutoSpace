@@ -11,6 +11,7 @@ import VehicleOverviewBox from '../components/VehicleOverviewBox';
 import CarInfoSidebar from '../components/CarInfoSidebar';
 import VINDecoder from '../components/VINDecoder';
 import axios from 'axios'
+import { Form } from "react-bootstrap";
 
 class VehicleDisplay extends Component {
   constructor(props) {
@@ -114,9 +115,12 @@ class VehicleDisplay extends Component {
     return (
       <>
         <Navbar>
-          <NavbarLink url='/members'>My Garage</NavbarLink>
-          <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-          <ActionBtn handleClick={this.signOut} url='/'>Sign Out</ActionBtn>
+          <div></div>
+          <Form inline>
+            <NavbarLink url='/members'>My Garage</NavbarLink>
+            <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
+            <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
+          </Form>
         </Navbar>
         <div className='garageWrapper'>
           <div className='garageSidebar'>
@@ -137,7 +141,6 @@ class VehicleDisplay extends Component {
                   </Link>
                 </span>
               ))}
-              <ActionBtn url={`/NewMaintenance/${this.state.vehicle.id}`}>Add Maintenance</ActionBtn>
             </VehicleMaintBox>
             <VehicleMaintBox header='Recommended Maintenance'>
               <FormLine lineTitle='Break Replacement' lineHeadOne='Service Milage' lineHeadTwo='Complete Service' lineValOne='160,000' checkbox='display' />
