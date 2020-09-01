@@ -9,18 +9,9 @@ import FormLine from '../components/FormLine';
 import VehicleMaintBox from '../components/VehicleMaintBox';
 import VehicleOverviewBox from '../components/VehicleOverviewBox';
 import CarInfoSidebar from '../components/CarInfoSidebar';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import VINDecoder from '../components/VINDecoder';
-import axios from 'axios'
-=======
-import { Form } from "react-bootstrap";
->>>>>>> e8068ddc82ac8ffd74417857c3d697b5484155f6
-=======
 import VINDecoder from '../components/VINDecoder';
 import axios from 'axios'
 import { Form } from "react-bootstrap";
->>>>>>> 837808dac1f21a90e7d71289b8cbf7870f8c738d
 
 class VehicleDisplay extends Component {
   constructor(props) {
@@ -100,10 +91,6 @@ class VehicleDisplay extends Component {
       })
 
   };
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 837808dac1f21a90e7d71289b8cbf7870f8c738d
 
   vinSubmit = (e) => {
     // jf1gd29622g513305 -- real vin for testing;
@@ -123,12 +110,6 @@ class VehicleDisplay extends Component {
     });
   }
   signOut = () => { localStorage.removeItem("jwt.Token") }
-<<<<<<< HEAD
-=======
-  signOut = () => { localStorage.removeItem("jwt.Token"); }
->>>>>>> e8068ddc82ac8ffd74417857c3d697b5484155f6
-=======
->>>>>>> 837808dac1f21a90e7d71289b8cbf7870f8c738d
 
   render() {
     return (
