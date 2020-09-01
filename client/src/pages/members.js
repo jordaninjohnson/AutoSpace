@@ -11,7 +11,7 @@ import UserInfo from '../components/UserInfo';
 import CarInfoBox from "../components/CarInfoBox"
 import { Form } from "react-bootstrap";
 
-export default function Members(props) {
+export default function Members() {
   const [userId, setUserId] = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({});
   const [userVehicles, setVehicle] = useState([]);

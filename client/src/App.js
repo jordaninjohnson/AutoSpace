@@ -12,6 +12,7 @@ import ReactNotification from "react-notifications-component";
 import { AuthProvider } from "./utils/authContext";
 import ProtectedRoute from './utils/protectedRoute';
 import "bootstrap/dist/css/bootstrap.min.css";
+import updateMilage from "./pages/updateMilage";
 
 export default function App() {
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function App() {
               <ProtectedRoute exact path="/Vehicles" component={Vehicles} />
               <ProtectedRoute exact path="/NewMaintenance/:id" component={NewMaintenance} />
               <ProtectedRoute path="/Vehicles/:id" component={VehicleDisplay} />
+              <ProtectedRoute path="/VehiclesMilage/:id" component={updateMilage} />
             </Switch>
           </header>
         </div >
