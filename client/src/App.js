@@ -27,8 +27,8 @@ export default function App() {
             <Switch>
               <Route exact path="/" component={Login} />
               <ProtectedRoute path="/Members" component={Members} />
-              <ProtectedRoute path="/MaintRecord/:id" component={MaintRecord} />
               <ProtectedRoute exact path="/Maintenance" component={Maintenance} />
+              <ProtectedRoute path="/MaintRecord/:id" component={MaintRecord} />
               <ProtectedRoute exact path="/Vehicles" component={Vehicles} />
               <ProtectedRoute exact path="/NewMaintenance/:id" component={NewMaintenance} />
               <ProtectedRoute path="/Vehicles/:id" component={VehicleDisplay} />

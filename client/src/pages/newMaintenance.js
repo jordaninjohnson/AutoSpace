@@ -163,6 +163,7 @@ class NewMaintenance extends Component {
               <div className="width100">
                 <span className="floatingLabelFocus">Service Date</span>
                 <input
+                  placeholder="YYYY-MM-DD"
                   type="date"
                   className="inputText"
                   name="jobDate"
