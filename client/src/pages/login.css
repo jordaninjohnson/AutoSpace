@@ -1,24 +1,24 @@
-.mainHeader{
+.mainHeader {
   text-align: center;
   font-size: 3rem;
   color: #505050;
 }
 
-.signInFlex{
+.signInFlex {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap-reverse;
 }
 
-.flex{
+.flex {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
 }
 
-.signUpWrapper{
+.signUpWrapper {
   width: 40%;
   display: flex;
   justify-content: center;
@@ -26,7 +26,7 @@
   flex-direction: column;
 }
 
-.signUpHeader{
+.signUpHeader {
   text-align: center;
   color: #505050;
   font-size: 2rem;
@@ -35,10 +35,10 @@
 }
 
 @media (max-width: 769px) {
-  .signUpHeader{
+  .signUpHeader {
     font-size: 1.5rem;
   }
-  .signUpWrapper{
+  .signUpWrapper {
     width: 90%;
     justify-content: center;
   }

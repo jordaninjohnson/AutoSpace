@@ -17,8 +17,8 @@ router.post("/api/login", (req, res) => {
       // If they cannot find a user
       bcrypt.compare(req.body.password, user.dataValues.password, (err, result) => {
         if (err) {
-          return res.status(401).json({
-            message: "Auth Unsuccessful"
+          return res.status(401).send({
+            message: "Somthing wrong!"
           });
         }
         if (result) {
@@ -29,7 +29,7 @@ router.post("/api/login", (req, res) => {
             firstName: user.dataValues.firstName,
             imageUrl: user.dataValues.imageUrl
           },
-          'SecretPasswordNoOneWillEverGuess',
+            'SecretPasswordNoOneWillEverGuess',
             {
               expiresIn: "1h"
             }
@@ -44,11 +44,11 @@ router.post("/api/login", (req, res) => {
               imageUrl: user.dataValues.imageUrl
             })
         }
-        res.status(401).json({
-          message: "Auth Unsuccessful"
+        res.status(401).send({
+          message: "Wrong password!"
         })
       })
-    }).catch(err => { res.status(401).json(err); });
+    }).catch(err => { res.status(401).send({ message: "User not found!" }); });
 })
 
 

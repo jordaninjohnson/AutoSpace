@@ -9,8 +9,12 @@ import FormLine from '../components/FormLine';
 import VehicleMaintBox from '../components/VehicleMaintBox';
 import VehicleOverviewBox from '../components/VehicleOverviewBox';
 import CarInfoSidebar from '../components/CarInfoSidebar';
+<<<<<<< HEAD
 import VINDecoder from '../components/VINDecoder';
 import axios from 'axios'
+=======
+import { Form } from "react-bootstrap";
+>>>>>>> e8068ddc82ac8ffd74417857c3d697b5484155f6
 
 class VehicleDisplay extends Component {
   constructor(props) {
@@ -90,6 +94,7 @@ class VehicleDisplay extends Component {
       })
 
   };
+<<<<<<< HEAD
 
   vinSubmit = (e) => {
     // jf1gd29622g513305 -- real vin for testing;
@@ -109,14 +114,20 @@ class VehicleDisplay extends Component {
     });
   }
   signOut = () => { localStorage.removeItem("jwt.Token") }
+=======
+  signOut = () => { localStorage.removeItem("jwt.Token"); }
+>>>>>>> e8068ddc82ac8ffd74417857c3d697b5484155f6
 
   render() {
     return (
       <>
         <Navbar>
-          <NavbarLink url='/members'>My Garage</NavbarLink>
-          <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
-          <ActionBtn handleClick={this.signOut} url='/'>Sign Out</ActionBtn>
+          <div></div>
+          <Form inline>
+            <NavbarLink url='/members'>My Garage</NavbarLink>
+            <NavbarLink url='/vehicles'>Add Vehicle</NavbarLink>
+            <ActionBtn handleClick={this.signOut}>Sign Out</ActionBtn>
+          </Form>
         </Navbar>
         <div className='garageWrapper'>
           <div className='garageSidebar'>
@@ -137,7 +148,6 @@ class VehicleDisplay extends Component {
                   </Link>
                 </span>
               ))}
-              <ActionBtn url={`/NewMaintenance/${this.state.vehicle.id}`}>Add Maintenance</ActionBtn>
             </VehicleMaintBox>
             <VehicleMaintBox header='Recommended Maintenance'>
               <FormLine lineTitle='Break Replacement' lineHeadOne='Service Milage' lineHeadTwo='Complete Service' lineValOne='160,000' checkbox='display' />

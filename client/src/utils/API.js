@@ -13,34 +13,30 @@ export default {
     loginUser: function (user) {
         return axios.post(serverUrl + "/api/login", user)
             .then(res => {
-                // console.log(res);
-                const token = res.data.token;
-                localStorage.setItem("jwt.Token", token);
-                setAuthorizationToken(token);
+                localStorage.setItem("jwt.Token", JSON.stringify(res.data));
+                setAuthorizationToken(res.data.token);
                 return res;
             });
     },
     signUp: function (data) {
         return axios.post(serverUrl + "/api/signup", data)
             .then(res => {
-                // console.log(res)
-                const token = res.data.token;
-                localStorage.setItem("jwt.Token", token);
-                setAuthorizationToken(token);
+                localStorage.setItem("jwt.Token", JSON.stringify(res.data));
+                setAuthorizationToken(res.data.token);
                 return res;
             });
     },
     newVehicle: function (data) {
         return axios.post(serverUrl + "/api/postVehicle", data, {
             headers: {
-                Authorization: localStorage.getItem("jwt.Token")
+                Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
     maintRecord: function (data) {
         return axios.post(serverUrl + "/api/maintenance/:id", data, {
             headers: {
-                Authorization: localStorage.getItem("jwt.Token")
+                Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
@@ -50,7 +46,7 @@ export default {
         // Data is equal to user Id
         return axios.get(serverUrl + "/vehiclefind/" + data, {
             headers: {
-                Authorization: localStorage.getItem("jwt.Token")
+                Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         }).then(res => {
             // console.log(res)
@@ -64,7 +60,7 @@ export default {
         // Data is Equal to Vehicle Id
         return axios.get(serverUrl + "/vehicleOnefind/" + data, {
             headers: {
-                Authorization: localStorage.getItem("jwt.Token")
+                Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
@@ -72,14 +68,14 @@ export default {
         // Data is Equal to vehicle Id
         return axios.get(serverUrl + "/maintenancefindvehicle/" + data, {
             headers: {
-                Authorization: localStorage.getItem("jwt.Token")
+                Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
     getOneMaintRecord: function (data) {
         return axios.get(serverUrl + "/maintenancefind/" + data, {
             headers: {
-                Authorization: localStorage.getItem("jwt.Token")
+                Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     }
