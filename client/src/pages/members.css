@@ -1,22 +1,22 @@
-*{
+* {
   box-sizing: border-box;
 }
 
-.garageWrapper{
+.garageWrapper {
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
 }
 
-.garageSidebar{
+.garageSidebar {
   width: 25%;
 }
 
-.garageMain{
+.garageMain {
   width: 50%;
 }
 
-.garagePageTitle{
+.garagePageTitle {
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
@@ -24,11 +24,10 @@
 }
 
 @media (max-width: 769px) {
-  .garageSidebar{
+  .garageSidebar {
     width: 100%;
   }
-  
-  .garageMain{
+  .garageMain {
     width: 100%;
   }
 }

@@ -1,4 +1,4 @@
-.carInfoBox{
+.carInfoBox {
   box-sizing: border-box;
   background-color: white;
   border: solid #505050 1px;
@@ -9,64 +9,66 @@
   margin-bottom: 1.5rem;
 }
 
-.carBoxImg{
-  width: 25%;
+.carBoxImg {
+  display: block;
+  max-width:300px;
+  max-height:150px;
+  width: auto;
   height: auto;
   margin: 1rem;
   margin-right: 3rem;
 }
 
-.carBoxTitle{
+.carBoxTitle {
   color: #505050;
   font-size: 2rem;
   text-align: center;
   font-weight: 600;
 }
 
-.carBoxText{
+.carBoxText {
   color: #505050;
   margin-bottom: .25rem;
 }
 
-.carBoxTopInfo{
+.carBoxTopInfo {
   display: flex;
   flex-wrap: wrap;
 }
-.carBoxMoreInfo{
+
+.carBoxMoreInfo {
   display: flex;
   flex-wrap: wrap;
   margin: 1rem;
   justify-content: space-between;
 }
 
-.carBoxLink{
+.carBoxLink {
   color: #424ea1;
   margin-bottom: .25rem;
   cursor: default;
 }
 
-.carBoxLink:hover{
+.carBoxLink:hover {
   color: #3a458f;
   cursor: default;
   text-shadow: #3a458f 1px 1px;
 }
 
-.carBoxLinkRed{
+.carBoxLinkRed {
   color: red;
   margin-bottom: .25rem;
   cursor: default;
 }
 
-.carBoxLinkRed:hover{
+.carBoxLinkRed:hover {
   color: rgb(190, 3, 3);
   cursor: default;
   text-shadow: rgb(190, 3, 3) 1px 1px;
 }
 
-.carBoxLinkContainer{
+.carBoxLinkContainer {
   align-self: baseline;
 }
 
-@media(max-width: 769px) {
-
-}
+@media(max-width: 769px) {}

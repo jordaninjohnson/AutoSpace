@@ -137,19 +137,21 @@ class VehicleDisplay extends Component {
               {this.state.maintRecords.map(job => (
                 <span key={job.id}>
                   <Link to={`/MaintRecord/${job.id}`}>
-                    <FormLine lineTitle={job.name} lineHeadOne='Service Date' lineHeadTwo='Service Milage' lineValOne={job.jobDate} lineValTwo={job.milage} />
+                    <FormLine lineTitle={job.name} lineHeadOne='Service Date' lineHeadTwo='Service Mileage' lineValOne={job.jobDate} lineValTwo={job.mileage} />
                   </Link>
                 </span>
               ))}
             </VehicleMaintBox>
             <VehicleMaintBox header='Recommended Maintenance'>
-              <FormLine lineTitle='Break Replacement' lineHeadOne='Service Milage' lineHeadTwo='Complete Service' lineValOne='160,000' checkbox='display' />
-              <FormLine lineTitle='Break Replacement' lineHeadOne='Service Milage' lineHeadTwo='Complete Service' lineValOne='160,000' checkbox='display' />
+              <FormLine lineTitle='Break Replacement' lineHeadOne='Service Mileage' lineHeadTwo='Complete Service' lineValOne='160,000' checkbox='display' />
+              <FormLine lineTitle='Break Replacement' lineHeadOne='Service Mileage' lineHeadTwo='Complete Service' lineValOne='160,000' checkbox='display' />
             </VehicleMaintBox>
           </div>
           <div className='garageSidebar vehicleLinksSidebar'>
             <div className='vehicleBoxLinkContainer'>
-              <p className='vehicleBoxLink'>Update Milage</p>
+              <Link to={`/vehiclesMileage/${this.state.vehicle.id}`}>
+                <p className='vehicleBoxLink'>Update Mileage</p>
+              </Link>
               <Link to={`/NewMaintenance/${this.state.vehicle.id}`}>
                 <p className='vehicleBoxLink'>New Maintenance</p>
               </Link>

@@ -108,7 +108,6 @@ class NewMaintenance extends Component {
 
   componentDidMount() {
     let location = this.props.match.params.id;
-    console.log(location)
     this.setState({
       vehicleID: location
     }, () => {

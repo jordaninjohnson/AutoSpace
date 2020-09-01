@@ -78,6 +78,9 @@ export default {
                 Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
+    },
+    updateMileage: function (data) {
+        return axios.post(serverUrl + "/api/mileage", data);
     }
 }
 
