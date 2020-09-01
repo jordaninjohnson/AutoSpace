@@ -180,14 +180,8 @@ class NewMaintenance extends Component {
           <br />
           <div className='maintFlex'>
             <div className='addMaintenanceWrapper'>
+              <ActionBtn handleClick={this.handleFormSubmit} disabled={this.state.disable}>{this.state.button}<Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" className={this.state.spinner} /></ActionBtn>
             </div>
-            <div className='addMaintenanceWrapper'>
-            </div>
-          </div>
-          <br></br>
-          <br></br>
-          <div className='newMaintBtn'>
-            <ActionBtn handleClick={this.handleFormSubmit} disabled={this.state.disable}>{this.state.button}<Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" className={this.state.spinner} /></ActionBtn>
           </div>
         </Form>
       </>
