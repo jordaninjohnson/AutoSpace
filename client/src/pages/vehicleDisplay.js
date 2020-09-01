@@ -92,9 +92,9 @@ class VehicleDisplay extends Component {
   };
 
   vinSubmit = (e) => {
-    console.log('hit vinSubmit');
+    // jf1gd29622g513305 -- real vin for testing;
     // this.state.vehicle.vin   how to access vin user entered
-    axios.get('http://api.carmd.com/v3.0/decode?vin=jf1gd29622g513305',{
+    axios.get('http://api.carmd.com/v3.0/decode?vin=' + this.state.vehicle.vin,{
       headers:{
         "content-type":"application/json",
         Authorization :"Basic OTZlYzhiZTEtZjIwZi00YWM0LWEyODAtZGI2NDliZGVkMmU5",
