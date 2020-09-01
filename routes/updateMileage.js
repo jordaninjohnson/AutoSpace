@@ -3,7 +3,6 @@ const app = require("express");
 const router = app.Router();
 
 router.post("/api/mileage", (req, res) => {
-    console.log(req.body.id)
     db.Vehicle
         .update({ mileage: req.body.mileage }, {
             where: {

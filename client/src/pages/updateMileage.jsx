@@ -1,3 +1,4 @@
+import Message from "../components/Message";
 import React, { useContext } from "react";
 import API from "../utils/API";
 import { AuthContext } from "../utils/authContext";
@@ -12,6 +13,8 @@ import FormInputTwo from "../components/FormInputTwo";
 export default function Mileage(props) {
     const [setUserId] = useContext(AuthContext);
     const [userVehicle, setVehicle] = useState({});
+    const [mileage, setMileage] = useState();
+
     const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); }
 
     useEffect(() => {
@@ -20,6 +23,33 @@ export default function Mileage(props) {
             .then(data => setVehicle(data.data[0]))
             .catch(err => console.log(err));
     }, [])
+
+    const updateMileage = () => {
+        if (mileage === undefined || mileage <= userVehicle.mileage) {
+            const info = ["Enter a number larger than current mileage", "warning", "animate__shakeX", "animate__fadeOut"];
+            Message(info);
+            return;
+        }
+        const newMileage = {
+            id: props.match.params.id,
+            mileage: mileage
+        }
+        API
+            .updateMileage(newMileage)
+            .then(() => {
+                props.history.push("/Members");
+                const info = ["Mileage updated", "success", "animate__bounceIn", "animate__bounceOut"];
+                Message(info);
+            })
+            .catch(err => {
+                const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"];
+                Message(info);
+            });
+    }
+
+    const handleInputChange = (e) => {
+        setMileage(e.target.value);
+    }
 
     return (
         <div>
@@ -46,7 +76,7 @@ export default function Mileage(props) {
                                 <h2 className='carBoxTitle'>{userVehicle.year} {userVehicle.make} {userVehicle.model}</h2>
                                 <p className='carBoxText'>Current Mileage: {userVehicle.mileage}</p>
                                 <p className='carBoxText'>Vin: {userVehicle.vin}</p>
-                                <FormInputTwo setWidth='width65' name='Mileage' type='number' label='New Mileage' id="year"></FormInputTwo>
+                                <FormInputTwo setWidth='width65' type='number' label='New Mileage' handleInputChange={handleInputChange}></FormInputTwo>
                             </div>
                         </span>
                         <br></br>
@@ -56,7 +86,7 @@ export default function Mileage(props) {
                                 <p className='carBoxText'>Accidents: {userVehicle.accidents}</p>
                             </div>
                             <div className='carBoxLinkContainer'>
-                                <p className='carBoxLink'>Save</p>
+                                <p className='carBoxLink' onClick={updateMileage}>Save</p>
                             </div>
                         </span>
                     </div>
