@@ -11,7 +11,7 @@ import { Form } from "react-bootstrap";
 import FormInputTwo from "../components/FormInputTwo";
 
 export default function Mileage(props) {
-    const [setUserId] = useContext(AuthContext);
+    const [userId, setUserId] = useContext(AuthContext);
     const [userVehicle, setVehicle] = useState({});
     const [mileage, setMileage] = useState();
 

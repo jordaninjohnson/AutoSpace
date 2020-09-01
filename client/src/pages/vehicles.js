@@ -49,9 +49,9 @@ export default function Vehicles(props) {
   });
   const [vehicleOwners, setVehicleOwners] = useState(2);
 
-  const [setUserId] = useContext(AuthContext);
+  const [userId, setUserId] = useContext(AuthContext);
 
-  const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); }
+  const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
 
   const handleInputChange = event => {
     // Getting the value and name of the input which triggered the change

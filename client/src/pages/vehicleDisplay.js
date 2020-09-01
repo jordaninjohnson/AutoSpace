@@ -18,12 +18,12 @@ class VehicleDisplay extends Component {
     super(props)
     this.state = {
       carmdVinData: {
-        year:'?',
-        make:'?',
-        model:'?',
-        engine:'?',
-        trim:'?',
-        transmission:'?',
+        year: '?',
+        make: '?',
+        model: '?',
+        engine: '?',
+        trim: '?',
+        transmission: '?',
       },
       vehicleID: "",
       vehicle: {},
@@ -95,11 +95,11 @@ class VehicleDisplay extends Component {
   vinSubmit = (e) => {
     // jf1gd29622g513305 -- real vin for testing;
     // this.state.vehicle.vin   how to access vin user entered
-    axios.get('http://api.carmd.com/v3.0/decode?vin=' + this.state.vehicle.vin,{
-      headers:{
-        "content-type":"application/json",
-        Authorization :"Basic OTZlYzhiZTEtZjIwZi00YWM0LWEyODAtZGI2NDliZGVkMmU5",
-        "partner-token":"026c5798aa9642848403cec554d316a2"
+    axios.get('http://api.carmd.com/v3.0/decode?vin=' + this.state.vehicle.vin, {
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Basic OTZlYzhiZTEtZjIwZi00YWM0LWEyODAtZGI2NDliZGVkMmU5",
+        "partner-token": "026c5798aa9642848403cec554d316a2"
       }
     }).then(response => {
       // console.log(response);
@@ -109,7 +109,7 @@ class VehicleDisplay extends Component {
       })
     });
   }
-  signOut = () => { localStorage.removeItem("jwt.Token") }
+  signOut = () => { localStorage.removeItem("jwt.Token"); window.location.reload(); }
 
   render() {
     return (
