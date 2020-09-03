@@ -49,7 +49,7 @@ class MaintRecord extends Component {
                 console.log(err)
             })
     }
-    signOut = () => { localStorage.removeItem("jwt.Token"); window.location.reload(); }
+    signOut = () => { localStorage.clear(); window.location.reload(); }
 
     render() {
         return (

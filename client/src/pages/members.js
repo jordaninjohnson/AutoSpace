@@ -1,3 +1,4 @@
+import Message from "../components/Message";
 import React, { useContext } from "react";
 import API from "../utils/API";
 import './members.css';
@@ -15,7 +16,7 @@ export default function Members() {
   const [userId, setUserId] = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({});
   const [userVehicles, setVehicle] = useState([]);
-  const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
+  const signOut = () => { setUserId({ showNotification: true }); localStorage.clear(); window.location.reload(); }
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
@@ -23,9 +24,10 @@ export default function Members() {
     API.allVehicles(JSON.parse(localStorage.getItem("jwt.Token")).id)
       .then(res => {
         setVehicle([
-          ...userVehicles,
           ...res.data
         ])
+        localStorage.setItem("vehicles", JSON.stringify(res.data));
+        console.log(JSON.parse(localStorage.getItem("vehicles")))
         if (Notification.permission === "granted" && userId.showNotification === true) {
           // navigator.serviceWorker.getRegistration().then(reg => {
           //   reg.showNotification("You have " + res.data.length + " vehicles in your garage.");
@@ -35,7 +37,25 @@ export default function Members() {
         }
       })
       .catch(err => {
-        console.log(err);
+        if (JSON.parse(localStorage.getItem("vehicles")) && err.message === "Network Error") {
+          const data = JSON.parse(localStorage.getItem("vehicles"));
+          setVehicle([
+            ...data
+          ])
+          const info = [err.message + ". Displaying saved vehicles before offline.", "danger", "animate__shakeX", "animate__fadeOut"]
+          Message(info);
+        } else if (JSON.parse(localStorage.getItem("vehicles"))) {
+          const data = JSON.parse(localStorage.getItem("vehicles"));
+          setVehicle([
+            ...data
+          ])
+          const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"]
+          Message(info);
+        } else {
+          const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"]
+          Message(info);
+        }
+        console.log(err.message)
       });
 
     API.userData(JSON.parse(localStorage.getItem("jwt.Token")).id)
@@ -43,6 +63,7 @@ export default function Members() {
         setUserInfo(
           ...res.data
         )
+        console.log(...res.data)
       })
       .catch(err => {
         console.log(err);
