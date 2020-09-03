@@ -27,7 +27,6 @@ export default function Members() {
           ...res.data
         ])
         localStorage.setItem("vehicles", JSON.stringify(res.data));
-        console.log(JSON.parse(localStorage.getItem("vehicles")))
         if (Notification.permission === "granted" && userId.showNotification === true) {
           // navigator.serviceWorker.getRegistration().then(reg => {
           //   reg.showNotification("You have " + res.data.length + " vehicles in your garage.");
@@ -42,6 +41,10 @@ export default function Members() {
           setVehicle([
             ...data
           ])
+          const userData = JSON.parse(localStorage.getItem("user"));
+          setUserInfo(
+            ...userData
+          )
           const info = [err.message + ". Displaying saved vehicles before offline.", "danger", "animate__shakeX", "animate__fadeOut"]
           Message(info);
         } else if (JSON.parse(localStorage.getItem("vehicles"))) {
@@ -49,13 +52,16 @@ export default function Members() {
           setVehicle([
             ...data
           ])
+          const userData = JSON.parse(localStorage.getItem("user"));
+          setUserInfo(
+            ...userData
+          )
           const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"]
           Message(info);
         } else {
           const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"]
           Message(info);
         }
-        console.log(err.message)
       });
 
     API.userData(JSON.parse(localStorage.getItem("jwt.Token")).id)
@@ -63,11 +69,9 @@ export default function Members() {
         setUserInfo(
           ...res.data
         )
-        console.log(...res.data)
+        localStorage.setItem("user", JSON.stringify(res.data));
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => console.log(err));
 
   }, [])
 
