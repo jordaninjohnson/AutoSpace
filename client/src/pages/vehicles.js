@@ -51,7 +51,7 @@ export default function Vehicles(props) {
 
   const [userId, setUserId] = useContext(AuthContext);
 
-  const signOut = () => { setUserId({ showNotification: true }); localStorage.removeItem("jwt.Token"); window.location.reload(); }
+  const signOut = () => { setUserId({ showNotification: true }); localStorage.clear(); window.location.reload(); }
 
   const handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -103,6 +103,11 @@ export default function Vehicles(props) {
         image: imageUrl,
       });
     }
+    if (!vehicleType || !make || !model || !year || !vin || !mileage || !yearPurchased || !vehicleCondition || !accidents || !vehicleOwners || !locationLastOwned) {
+      const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
+      Message(info);
+      return;
+    }
     API.newVehicle(vehicleNew)
       .then(() => {
         setUserId({ showNotification: true });
@@ -111,27 +116,40 @@ export default function Vehicles(props) {
         Message(info);
       })
       .catch(() => {
-        const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
+        const info = ["You are offline vehicle will be added when you are online.", "danger", "animate__shakeX", "animate__fadeOut"]
         Message(info);
+        //save all the vehicles added when offline
+        if (JSON.parse(localStorage.getItem("offline"))) {
+          const temp = JSON.parse(localStorage.getItem("offline"));
+          temp.push(vehicleNew);
+          localStorage.setItem("offline", JSON.stringify(temp));
+        } else {
+          localStorage.setItem("offline", JSON.stringify([vehicleNew]));
+        }
       });
   };
 
   const onFileChange = async (e) => {
-    console.log("uploading...");
-    setDisable("true");
-    setSpinner("");
-    setButton("Uploading...");
-    const file = e.target.files[0];
-    const storageRef = app.storage().ref();
-    const fileRef = storageRef.child(file.name);
-    await fileRef.put(file);
-    setImageUrl(await fileRef.getDownloadURL());
-    console.log("complete");
-    setDisable("");
-    setSpinner("d-none");
-    setButton("Add Vehicle");
+    //only upload when online
+    if (navigator.onLine) {
+      console.log("uploading...");
+      setDisable("true");
+      setSpinner("");
+      setButton("Uploading...");
+      const file = e.target.files[0];
+      const storageRef = app.storage().ref();
+      const fileRef = storageRef.child(file.name);
+      await fileRef.put(file);
+      setImageUrl(await fileRef.getDownloadURL());
+      console.log("complete");
+      setDisable("");
+      setSpinner("d-none");
+      setButton("Add Vehicle");
+    } else {
+      const info = ["You are offline.", "danger", "animate__shakeX", "animate__fadeOut"]
+      Message(info);
+    }
   }
-
 
   const handleSelectionClick = (e) => {
     e.preventDefault();
@@ -146,7 +164,6 @@ export default function Vehicles(props) {
       case "vehicleCondition":
         setVehicleCondition(choiceId)
         setActiveCondition({ [choiceValue]: true })
-
         break;
       case "vehicleOwners":
         setVehicleOwners(choiceId)

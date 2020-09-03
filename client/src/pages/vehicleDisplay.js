@@ -109,7 +109,7 @@ class VehicleDisplay extends Component {
       })
     });
   }
-  signOut = () => { localStorage.removeItem("jwt.Token"); window.location.reload(); }
+  signOut = () => { localStorage.clear(); window.location.reload(); }
 
   render() {
     return (
