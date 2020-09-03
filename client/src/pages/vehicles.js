@@ -103,6 +103,11 @@ export default function Vehicles(props) {
         image: imageUrl,
       });
     }
+    if (!vehicleType || !make || !model || !year || !vin || !mileage || !yearPurchased || !vehicleCondition || !accidents || !vehicleOwners || !locationLastOwned) {
+      const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
+      Message(info);
+      return;
+    }
     API.newVehicle(vehicleNew)
       .then(() => {
         setUserId({ showNotification: true });
@@ -111,27 +116,38 @@ export default function Vehicles(props) {
         Message(info);
       })
       .catch(() => {
-        const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
+        const info = ["You are offline vehicle will be added when you are online.", "danger", "animate__shakeX", "animate__fadeOut"]
         Message(info);
+        if (JSON.parse(localStorage.getItem("offline"))) {
+          const temp = JSON.parse(localStorage.getItem("offline"));
+          temp.push(vehicleNew);
+          localStorage.setItem("offline", JSON.stringify(temp));
+        } else {
+          localStorage.setItem("offline", JSON.stringify([vehicleNew]));
+        }
       });
   };
 
   const onFileChange = async (e) => {
-    console.log("uploading...");
-    setDisable("true");
-    setSpinner("");
-    setButton("Uploading...");
-    const file = e.target.files[0];
-    const storageRef = app.storage().ref();
-    const fileRef = storageRef.child(file.name);
-    await fileRef.put(file);
-    setImageUrl(await fileRef.getDownloadURL());
-    console.log("complete");
-    setDisable("");
-    setSpinner("d-none");
-    setButton("Add Vehicle");
+    if (navigator.onLine) {
+      console.log("uploading...");
+      setDisable("true");
+      setSpinner("");
+      setButton("Uploading...");
+      const file = e.target.files[0];
+      const storageRef = app.storage().ref();
+      const fileRef = storageRef.child(file.name);
+      await fileRef.put(file);
+      setImageUrl(await fileRef.getDownloadURL());
+      console.log("complete");
+      setDisable("");
+      setSpinner("d-none");
+      setButton("Add Vehicle");
+    } else {
+      const info = ["You are offline.", "danger", "animate__shakeX", "animate__fadeOut"]
+      Message(info);
+    }
   }
-
 
   const handleSelectionClick = (e) => {
     e.preventDefault();

@@ -20,6 +20,10 @@ export default function Members() {
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
+    window.addEventListener("offline", () => {
+      console.log("onlofflineine")
+    })
+    console.log(navigator.onLine)
     setDidMount(true);
     API.allVehicles(JSON.parse(localStorage.getItem("jwt.Token")).id)
       .then(res => {

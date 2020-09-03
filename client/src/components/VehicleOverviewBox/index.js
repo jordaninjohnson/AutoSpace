@@ -10,8 +10,8 @@ function VehicleOverviewBox(props) {
       </div>
       <br></br>
       <span className='vehicleBoxMoreInfo'>
-        <div class="columns">
-          <div class="column">
+        <div className="columns">
+          <div className="column">
             <p className='vehicleBoxText'>Make: {props.vehicle.make}</p>
             <p className='vehicleBoxText'>Model: {props.vehicle.model}</p>
             <p className='vehicleBoxText'>Year: {props.vehicle.year}</p>
