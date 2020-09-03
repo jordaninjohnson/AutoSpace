@@ -20,10 +20,22 @@ export default function Members() {
   const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("offline", () => {
-      console.log("onlofflineine")
-    })
-    console.log(navigator.onLine)
+    //it will add all the vehicles inside of localstorage offline when online
+    window.addEventListener("online", () => {
+      if (JSON.parse(localStorage.getItem("offline"))) {
+        const info1 = ["Syncing your offline vehicles with database.", "warning", "animate__shakeX", "animate__fadeOut"]
+        Message(info1);
+        const temp = JSON.parse(localStorage.getItem("offline"));
+        for (let i = 0; i < temp.length; i++) {
+          console.log(temp[i]);
+          API.newVehicle(temp[i]);
+        }
+        localStorage.removeItem("offline");
+        const info2 = ["Sync complete.", "warning", "animate__shakeX", "animate__fadeOut"]
+        Message(info2);
+      }
+    });
+
     setDidMount(true);
     API.allVehicles(JSON.parse(localStorage.getItem("jwt.Token")).id)
       .then(res => {

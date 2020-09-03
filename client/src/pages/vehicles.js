@@ -118,6 +118,7 @@ export default function Vehicles(props) {
       .catch(() => {
         const info = ["You are offline vehicle will be added when you are online.", "danger", "animate__shakeX", "animate__fadeOut"]
         Message(info);
+        //save all the vehicles added when offline
         if (JSON.parse(localStorage.getItem("offline"))) {
           const temp = JSON.parse(localStorage.getItem("offline"));
           temp.push(vehicleNew);
@@ -129,6 +130,7 @@ export default function Vehicles(props) {
   };
 
   const onFileChange = async (e) => {
+    //only upload when online
     if (navigator.onLine) {
       console.log("uploading...");
       setDisable("true");
@@ -162,7 +164,6 @@ export default function Vehicles(props) {
       case "vehicleCondition":
         setVehicleCondition(choiceId)
         setActiveCondition({ [choiceValue]: true })
-
         break;
       case "vehicleOwners":
         setVehicleOwners(choiceId)
