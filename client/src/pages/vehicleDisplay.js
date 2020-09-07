@@ -10,6 +10,7 @@ import VehicleMaintBox from '../components/VehicleMaintBox';
 import VehicleOverviewBox from '../components/VehicleOverviewBox';
 import CarInfoSidebar from '../components/CarInfoSidebar';
 import VINDecoder from '../components/VINDecoder';
+import CarMd from '../components/CarMd';
 import axios from 'axios'
 import { Form } from "react-bootstrap";
 
@@ -132,7 +133,6 @@ class VehicleDisplay extends Component {
             <br></br>
             <br></br>
             <VehicleOverviewBox title="Vehicle Overview" vehicle={this.state.vehicle} />
-            <VINDecoder vehicle={this.state.vehicle} onSubmit={this.vinSubmit} carmdVinData={this.state.carmdVinData} />
             <VehicleMaintBox header='Recent Maintenance'>
               {this.state.maintRecords.map(job => (
                 <span key={job.id}>
@@ -142,10 +142,8 @@ class VehicleDisplay extends Component {
                 </span>
               ))}
             </VehicleMaintBox>
-            <VehicleMaintBox header='Recommended Maintenance'>
-              <FormLine lineTitle='Break Replacement' lineHeadOne='Service Mileage' lineHeadTwo='Complete Service' lineValOne='160,000' checkbox='display' />
-              <FormLine lineTitle='Break Replacement' lineHeadOne='Service Mileage' lineHeadTwo='Complete Service' lineValOne='160,000' checkbox='display' />
-            </VehicleMaintBox>
+            <VINDecoder vehicle={this.state.vehicle} onSubmit={this.vinSubmit} carmdVinData={this.state.carmdVinData} />
+            <CarMd header="CarMd API Requests"/>
           </div>
           <div className='garageSidebar vehicleLinksSidebar'>
             <div className='vehicleBoxLinkContainer'>
