@@ -13,6 +13,7 @@ import VINDecoder from '../components/VINDecoder';
 import CarMd from '../components/CarMd';
 import axios from 'axios'
 import { Form } from "react-bootstrap";
+import Iframe from "react-iframe";
 
 class VehicleDisplay extends Component {
   constructor(props) {
@@ -30,10 +31,29 @@ class VehicleDisplay extends Component {
       vehicle: {},
       conditionDescription: "",
       maintRecords: [],
-      maintRecordsTable: {}
+      maintRecordsTable: {},
+      url: "https://www.google.com/maps/embed/v1/search?key=AIzaSyARakaUOSHnemUU6-KrvQTD2Mpc9JwcdO0&q=car+maintenance+near+",
+      title: "Car Maintenance near "
     };
   };
   componentDidMount() {
+    //get user location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        let coordinates = position.coords.latitude + "," + position.coords.longitude;
+        //use user's coordinates to get city and state
+        API
+          .getLocation(coordinates)
+          .then(data => {
+            this.setState({
+              url: this.state.url + data.data.city + data.data.statename,
+              title: this.state.title + data.data.city
+            })
+          })
+          .catch(err => console.log(err));
+      });
+    }
+    //get vehicle id
     let location = this.props.match.params.id;
     this.setState({
       vehicleID: location
@@ -142,8 +162,20 @@ class VehicleDisplay extends Component {
                 </span>
               ))}
             </VehicleMaintBox>
+
+            {/* box for google map */}
+            <div className='vehicleInfoBox'>
+              <div className='maintenanceDisplayTopInfo'>
+                <h2 className='maintenanceDisplayTitle'>{this.state.title}</h2>
+              </div>
+              <Iframe url={this.state.url}
+                width="600"
+                height="450"
+                styles={{ border: 0 }} />
+            </div>
+
             <VINDecoder vehicle={this.state.vehicle} onSubmit={this.vinSubmit} carmdVinData={this.state.carmdVinData} />
-            <CarMd header="CarMd API Requests"/>
+            <CarMd header="CarMd API Requests" />
           </div>
           <div className='garageSidebar vehicleLinksSidebar'>
             <div className='vehicleBoxLinkContainer'>

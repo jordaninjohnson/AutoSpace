@@ -81,6 +81,9 @@ export default {
     },
     updateMileage: function (data) {
         return axios.post(serverUrl + "/api/mileage", data);
+    },
+    getLocation: coordinates => {
+        return axios.get("https://geocode.xyz/"+ coordinates + "?json=1");
     }
 }
 
