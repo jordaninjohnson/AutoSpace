@@ -13,9 +13,7 @@ router.get("/api/user_data/:userid", (req, res) => {
     }
   }).then(results => {
     res.json(results);
-  }).catch(err => console.log(err))
-  // Otherwise send back the user's email and id
-
+  }).catch(err => res.status(500).json(err));
 });
 
 module.exports = router;

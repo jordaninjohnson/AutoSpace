@@ -4,7 +4,6 @@ const router = app.Router();
 const db = require("../models");
 
 router.post("/api/maintenance/:id", isAuthenticated, (req, res) => {
-  console.log(req.body)
   db.Maintenance.create({
     name: req.body.name,
     description: req.body.description,
@@ -39,7 +38,6 @@ router.get("/maintenancefindvehicle/:vehicleid", isAuthenticated, (req, res) => 
       VehicleId: vehicleId
     }
   }).then(result => {
-    console.log(result)
     res.send(result);
   })
     .catch(() => res.status(401).json(err));
