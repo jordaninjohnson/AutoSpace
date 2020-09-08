@@ -40,14 +40,16 @@ class VehicleDisplay extends Component {
     //get user location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        let coordinates = position.coords.latitude + "," + position.coords.longitude;
+        const coordinates = {
+          coordinates: position.coords.latitude + "," + position.coords.longitude
+        }
         //use user's coordinates to get city and state
         API
           .getLocation(coordinates)
           .then(data => {
             this.setState({
-              url: this.state.url + data.data.city + data.data.statename,
-              title: this.state.title + data.data.city
+              url: this.state.url + data.data.message,
+              title: this.state.title + data.data.message
             })
           })
           .catch(err => console.log(err));

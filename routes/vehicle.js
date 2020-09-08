@@ -14,23 +14,19 @@ router.get("/vehiclefind/:userid", isAuthenticated, (req, res) => {
     res.json(results)
   })
     .catch(err => {
-      console.log(err)
       res.status(401).send("Auth Unsuccessful");
     });
 });
 router.get("/vehicleOnefind/:vehicleId", isAuthenticated, (req, res) => {
-  console.log(req.params)
   const VehicleIdGet = req.params.vehicleId;
   db.Vehicle.findAll({
     where: {
       id: VehicleIdGet
     }
   }).then(results => {
-    // console.log(results)
     res.json(results)
   })
     .catch(err => {
-      console.log(err)
       res.status(401).send("Auth Unsuccessful");
     });
 });
@@ -54,7 +50,6 @@ router.post("/api/postVehicle", isAuthenticated, (req, res) => {
   }).then(dbPost => {
     res.json(dbPost);
   }).catch(err => {
-    console.log(err);
     res.status(401).json(err);
   });
 });

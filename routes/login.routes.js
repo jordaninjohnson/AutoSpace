@@ -13,7 +13,6 @@ router.post("/api/login", (req, res) => {
     }
   })
     .then(user => {
-      console.log(user.dataValues)
       // If they cannot find a user
       bcrypt.compare(req.body.password, user.dataValues.password, (err, result) => {
         if (err) {

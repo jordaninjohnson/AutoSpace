@@ -33,7 +33,6 @@ router.post("/api/signup", [verify.checkDuplicateUsernameOrEmail], (req, res) =>
               expiresIn: "1h"
             }
           )
-          console.log(token)
           return res.status(200).json({
             message: "Auth Successful",
             token: token,

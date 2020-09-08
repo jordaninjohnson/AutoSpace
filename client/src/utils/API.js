@@ -83,7 +83,7 @@ export default {
         return axios.post(serverUrl + "/api/mileage", data);
     },
     getLocation: coordinates => {
-        return axios.get("https://geocode.xyz/"+ coordinates + "?json=1");
+        return axios.post(serverUrl + "/api/location/", coordinates);
     }
 }
 
