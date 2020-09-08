@@ -27,7 +27,6 @@ export default function Members() {
         Message(info1);
         const temp = JSON.parse(localStorage.getItem("offline"));
         for (let i = 0; i < temp.length; i++) {
-          console.log(temp[i]);
           API.newVehicle(temp[i]);
         }
         localStorage.removeItem("offline");
