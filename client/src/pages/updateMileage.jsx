@@ -1,9 +1,7 @@
 import Message from "../components/Message";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import API from "../utils/API";
 import { AuthContext } from "../utils/authContext";
-import { useState } from "react";
-import { useEffect } from "react";
 import Navbar from '../components/Navbar copy';
 import NavbarLink from '../components/NavbarLink';
 import ActionBtn from '../components/ActionBtn';
@@ -22,7 +20,7 @@ export default function Mileage(props) {
             .vehicleById(props.match.params.id)
             .then(data => setVehicle(data.data[0]))
             .catch(err => console.log(err));
-    }, [])
+    }, [props.match.params.id])
 
     const updateMileage = () => {
         if (mileage === undefined || mileage <= userVehicle.mileage) {

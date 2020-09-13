@@ -24,7 +24,7 @@ class NewMaintenance extends Component {
         milage: "",
         parts: "",
         jobDate: "",
-        imageUrl: '',
+        imageUrl: "",
         VehicleId: ""
       },
       year: "",
@@ -33,7 +33,8 @@ class NewMaintenance extends Component {
       vehicle: [],
       button: "Add Maintenance",
       disable: "",
-      spinner: "d-none"
+      spinner: "d-none",
+      file: {}
     };
   };
   handleInputChange = event => {
@@ -64,8 +65,24 @@ class NewMaintenance extends Component {
       Message(info);
       return;
     }
+    if (navigator.onLine) {
+      this.setState({
+        disable: "true",
+        button: "Uploading...",
+        spinner: ""
+      });
+      const storageRef = app.storage().ref();
+      const fileRef = storageRef.child(this.state.file.name);
+      await fileRef.put(this.state.file);
+      newMaint.imageUrl = await fileRef.getDownloadURL();
+      this.setState({
+        disable: "",
+        button: "Upload complete",
+        spinner: "d-none"
+      });
+    }
     API.maintRecord(newMaint)
-      .then((res) => {
+      .then(() => {
         this.props.history.push(`/Vehicles/${this.state.maintToAdd.VehicleId}`)
       })
       .catch(err => {
@@ -76,34 +93,8 @@ class NewMaintenance extends Component {
     });
   };
 
-  onFileChange = async (e) => {
-
-    console.log("uploading...");
-    this.setState({
-      disable: "true",
-      button: "Uploading...",
-      spinner: ""
-    });
-
-    const file = e.target.files[0];
-    const storageRef = app.storage().ref();
-    const fileRef = storageRef.child(file.name);
-
-    await fileRef.put(file);
-    const fileRefDownloadUrl = await fileRef.getDownloadURL();
-
-    this.setState(prevState => ({
-      maintToAdd: {
-        ...prevState.maintToAdd,
-        imageUrl: fileRefDownloadUrl,
-      }
-    }));
-    this.setState({
-      disable: "",
-      button: "Add Maintenance",
-      spinner: "d-none"
-    });
-    console.log("complete");
+  onFileChange = (e) => {
+    this.setState({ file: e.target.files[0] });
   }
 
   componentDidMount() {
@@ -158,7 +149,7 @@ class NewMaintenance extends Component {
                 <label className='photoFileLabel'>Add Photo</label>
                 <ImageUpload onFileChange={this.onFileChange} />
               </span>
-              <FormInputTwo setWidth='width100' name='jobName' placeholder="YYYY-MM-DD" type='text' label='Job Name' id="name" value={this.state.maintToAdd.name} handleInputChange={this.handleInputChange}></FormInputTwo>
+              <FormInputTwo setWidth='width100' name='jobName' placeholder="" type='text' label='Job Name' id="name" value={this.state.maintToAdd.name} handleInputChange={this.handleInputChange}></FormInputTwo>
               <FormInputTwo setWidth='width100' name='milage' type='text' label='Milage at Service' id="milage" value={this.state.maintToAdd.milage} handleInputChange={this.handleInputChange}></FormInputTwo>
               <div className="width100">
                 <span className="floatingLabelFocus">Service Date</span>

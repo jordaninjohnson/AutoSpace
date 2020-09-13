@@ -12,30 +12,34 @@ import { AuthProvider } from "./utils/authContext";
 import ProtectedRoute from './utils/protectedRoute';
 import "bootstrap/dist/css/bootstrap.min.css";
 import updateMileage from "./pages/updateMileage";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   useEffect(() => {
     Notification.requestPermission();
   });
   return (
-    <Router>
-      <ReactNotification />
-      <AuthProvider>
-        <div className="App">
-          <header className="App-header">
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <ProtectedRoute path="/Members" component={Members} />
-              <ProtectedRoute exact path="/Maintenance" component={Maintenance} />
-              <ProtectedRoute path="/MaintRecord/:id" component={MaintRecord} />
-              <ProtectedRoute exact path="/Vehicles" component={Vehicles} />
-              <ProtectedRoute exact path="/NewMaintenance/:id" component={NewMaintenance} />
-              <ProtectedRoute path="/Vehicles/:id" component={VehicleDisplay} />
-              <ProtectedRoute path="/VehiclesMileage/:id" component={updateMileage} />
-            </Switch>
-          </header>
-        </div >
-      </AuthProvider>
-    </Router>
+    <div>
+      <Router>
+        <ReactNotification />
+        <AuthProvider>
+          <div className="App">
+            <header className="App-header">
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <ProtectedRoute path="/Members" component={Members} />
+                <ProtectedRoute exact path="/Maintenance" component={Maintenance} />
+                <ProtectedRoute path="/MaintRecord/:id" component={MaintRecord} />
+                <ProtectedRoute exact path="/Vehicles" component={Vehicles} />
+                <ProtectedRoute exact path="/NewMaintenance/:id" component={NewMaintenance} />
+                <ProtectedRoute path="/Vehicles/:id" component={VehicleDisplay} />
+                <ProtectedRoute path="/VehiclesMileage/:id" component={updateMileage} />
+              </Switch>
+            </header>
+          </div >
+        </AuthProvider>
+      </Router>
+      <ScrollToTop />
+    </div>
   )
 }

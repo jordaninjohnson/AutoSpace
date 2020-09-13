@@ -1,9 +1,8 @@
 import Message from "../components/Message";
-import React from "react";
+import React, { useState } from "react";
 import './login.css';
 import API from "../utils/API";
 import { withRouter } from "react-router-dom";
-import { useState } from "react";
 import Navbar from '../components/Navbar copy';
 import NavbarInput from '../components/NavbarInput';
 import ActionBtn from '../components/ActionBtn';
@@ -22,11 +21,11 @@ function Login(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [location, setLocation] = useState("");
-  const [imageUrl, setImageUrl] = React.useState(null);
 
   const [spinner, setSpinner] = useState("d-none");
   const [disable, setDisable] = useState("");
   const [signup, setSignup] = useState("Sign Up");
+  const [file, setFile] = useState();
 
   const handleLogInSubmit = (e) => {
     e.preventDefault();
@@ -68,19 +67,25 @@ function Login(props) {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       location: location.trim(),
-      imageUrl: imageUrl
+      imageUrl: ""
     }
     if (!email || !password || !firstName || !lastName || !location) {
       const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
       Message(info);
       return;
     }
-    await db.collection("users").doc(firstName).set({
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      image: imageUrl,
-    });
+    if (navigator.onLine) {
+      setDisable("true");
+      setSpinner("");
+      setSignup("Uploading...");
+      const storageRef = app.storage().ref();
+      const fileRef = storageRef.child(file.name);
+      await fileRef.put(file);
+      user.imageUrl = await fileRef.getDownloadURL();
+      setDisable("");
+      setSpinner("d-none");
+      setSignup("Upload complete");
+    }
     API.signUp(user)
       .then(() => {
         props.history.push("/Members")
@@ -129,20 +134,8 @@ function Login(props) {
     }
   };
 
-  const onFileChange = async (e) => {
-    console.log("uploading...");
-    setDisable("true");
-    setSpinner("");
-    setSignup("Uploading...");
-    const file = e.target.files[0];
-    const storageRef = app.storage().ref();
-    const fileRef = storageRef.child(file.name);
-    await fileRef.put(file);
-    setImageUrl(await fileRef.getDownloadURL());
-    console.log("complete");
-    setDisable("");
-    setSpinner("d-none");
-    setSignup("Sign Up");
+  const onFileChange = (e) => {
+    setFile(e.target.files[0]);
   }
 
   return (
