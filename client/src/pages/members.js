@@ -119,7 +119,6 @@ export default function Members() {
             </div>
           ))}
         </div>
-        <div className='garageSidebar'></div>
       </div>
     </>
   );

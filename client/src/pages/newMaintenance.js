@@ -93,7 +93,7 @@ class NewMaintenance extends Component {
     });
   };
 
-  onFileChange = async (e) => {
+  onFileChange = (e) => {
     this.setState({ file: e.target.files[0] });
   }
 

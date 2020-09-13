@@ -134,7 +134,7 @@ function Login(props) {
     }
   };
 
-  const onFileChange = async (e) => {
+  const onFileChange = (e) => {
     setFile(e.target.files[0]);
   }
 
