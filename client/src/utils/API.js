@@ -1,17 +1,9 @@
 import axios from "axios";
 import setAuthorizationToken from "./setAuthorizationToken";
 
-
-
-const serverUrl = "";
-// const serverUrl = "http://localhost:8080";
-
-
-
 export default {
-    // Post Routes
     loginUser: function (user) {
-        return axios.post(serverUrl + "/api/login", user)
+        return axios.post("/api/login", user)
             .then(res => {
                 localStorage.setItem("jwt.Token", JSON.stringify(res.data));
                 setAuthorizationToken(res.data.token);
@@ -19,7 +11,7 @@ export default {
             });
     },
     signUp: function (data) {
-        return axios.post(serverUrl + "/api/signup", data)
+        return axios.post("/api/signup", data)
             .then(res => {
                 localStorage.setItem("jwt.Token", JSON.stringify(res.data));
                 setAuthorizationToken(res.data.token);
@@ -27,63 +19,57 @@ export default {
             });
     },
     newVehicle: function (data) {
-        return axios.post(serverUrl + "/api/postVehicle", data, {
+        return axios.post("/api/postVehicle", data, {
             headers: {
                 Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
     maintRecord: function (data) {
-        return axios.post(serverUrl + "/api/maintenance/:id", data, {
+        return axios.post("/api/maintenance/:id", data, {
             headers: {
                 Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
-
-    // Get Routes
     allVehicles: function (data) {
-        // Data is equal to user Id
-        return axios.get(serverUrl + "/vehiclefind/" + data, {
+        return axios.get("/vehiclefind/" + data, {
             headers: {
                 Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         }).then(res => {
-            // console.log(res)
             return res;
         })
     },
     userData: function (data) {
-        return axios.get(serverUrl + "/api/user_data/" + data)
+        return axios.get("/api/user_data/" + data)
     },
     vehicleById: function (data) {
-        // Data is Equal to Vehicle Id
-        return axios.get(serverUrl + "/vehicleOnefind/" + data, {
+        return axios.get("/vehicleOnefind/" + data, {
             headers: {
                 Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
     getMaintRecords: function (data) {
-        // Data is Equal to vehicle Id
-        return axios.get(serverUrl + "/maintenancefindvehicle/" + data, {
+        return axios.get("/maintenancefindvehicle/" + data, {
             headers: {
                 Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
     getOneMaintRecord: function (data) {
-        return axios.get(serverUrl + "/maintenancefind/" + data, {
+        return axios.get("/maintenancefind/" + data, {
             headers: {
                 Authorization: JSON.parse(localStorage.getItem("jwt.Token")).token
             }
         })
     },
     updateMileage: function (data) {
-        return axios.post(serverUrl + "/api/mileage", data);
+        return axios.post("/api/mileage", data);
     },
     getLocation: coordinates => {
-        return axios.post(serverUrl + "/api/location/", coordinates);
+        return axios.post("/api/location/", coordinates);
     }
 }
 

@@ -1,10 +1,8 @@
 import Message from "../components/Message";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import API from "../utils/API";
 import './members.css';
 import { AuthContext } from "../utils/authContext";
-import { useState } from "react";
-import { useEffect } from "react";
 import Navbar from '../components/Navbar copy';
 import NavbarLink from '../components/NavbarLink';
 import ActionBtn from '../components/ActionBtn';
@@ -88,7 +86,7 @@ export default function Members() {
       })
       .catch(err => console.log(err));
 
-  }, [])
+  }, [setUserId, userId.showNotification])
 
   if (!didMount) {
     return null;

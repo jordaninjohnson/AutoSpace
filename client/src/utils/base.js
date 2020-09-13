@@ -3,9 +3,8 @@ import 'firebase/storage'
 import 'firebase/database'
 import 'firebase/firestore'
 
-
 export const app = firebase.initializeApp({
-    apiKey: process.env.API_KEY,
+    apiKey: " ",
     authDomain: "autospace-1234b.firebaseapp.com",
     databaseURL: "https://autospace-1234b.firebaseio.com",
     projectId: "autospace-1234b",

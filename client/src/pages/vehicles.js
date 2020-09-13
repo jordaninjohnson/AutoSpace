@@ -22,12 +22,10 @@ export default function Vehicles(props) {
   const [yearPurchased, setYearPurchased] = useState("");
   const [accidents, setAccidents] = useState("");
   const [locationLastOwned, setLocationLastOwned] = useState("");
-  const [imageUrl, setImageUrl] = React.useState(null);
 
   const [spinner, setSpinner] = useState("d-none");
   const [disable, setDisable] = useState("");
   const [button, setButton] = useState("Add Vehicle");
-
 
   const [activeType, setActiveType] = useState({
     car: true,
@@ -48,7 +46,7 @@ export default function Vehicles(props) {
     more: false
   });
   const [vehicleOwners, setVehicleOwners] = useState(2);
-
+  const [file, setFile] = useState();
   const [userId, setUserId] = useContext(AuthContext);
 
   const signOut = () => { setUserId({ showNotification: true }); localStorage.clear(); window.location.reload(); }
@@ -92,21 +90,24 @@ export default function Vehicles(props) {
       numOfOwners: vehicleOwners,
       locationLastOwned: locationLastOwned,
       UserId: JSON.parse(localStorage.getItem("jwt.Token")).id,
-      imageUrl: imageUrl
+      imageUrl: ""
     };
-    if (imageUrl !== null) {
-      await db.collection("users").doc(vin).set({
-        make: make,
-        model: model,
-        year: year,
-        vin: vin,
-        image: imageUrl,
-      });
-    }
     if (!vehicleType || !make || !model || !year || !vin || !mileage || !yearPurchased || !vehicleCondition || !accidents || !vehicleOwners || !locationLastOwned) {
       const info = ["Please fill out all the required fields!", "warning", "animate__shakeX", "animate__fadeOut"]
       Message(info);
       return;
+    }
+    if (navigator.onLine) {
+      setDisable("true");
+      setSpinner("");
+      setButton("Uploading...");
+      const storageRef = app.storage().ref();
+      const fileRef = storageRef.child(file.name);
+      await fileRef.put(file);
+      vehicleNew.imageUrl = await fileRef.getDownloadURL();
+      setDisable("");
+      setSpinner("d-none");
+      setButton("Upload complete");
     }
     API.newVehicle(vehicleNew)
       .then(() => {
@@ -130,25 +131,7 @@ export default function Vehicles(props) {
   };
 
   const onFileChange = async (e) => {
-    //only upload when online
-    if (navigator.onLine) {
-      console.log("uploading...");
-      setDisable("true");
-      setSpinner("");
-      setButton("Uploading...");
-      const file = e.target.files[0];
-      const storageRef = app.storage().ref();
-      const fileRef = storageRef.child(file.name);
-      await fileRef.put(file);
-      setImageUrl(await fileRef.getDownloadURL());
-      console.log("complete");
-      setDisable("");
-      setSpinner("d-none");
-      setButton("Add Vehicle");
-    } else {
-      const info = ["You are offline.", "danger", "animate__shakeX", "animate__fadeOut"]
-      Message(info);
-    }
+    setFile(e.target.files[0]);
   }
 
   const handleSelectionClick = (e) => {
