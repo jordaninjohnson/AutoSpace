@@ -68,6 +68,9 @@ export default {
     updateMileage: function (data) {
         return axios.post("/api/mileage", data);
     },
+    deleteVehicle: function (data) {
+        return axios.delete("/api/vehicles", { data: { id: data } });
+    },
     getLocation: coordinates => {
         return axios.post("/api/location/", coordinates);
     }

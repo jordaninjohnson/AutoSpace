@@ -3,6 +3,7 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 function CarInfoBox(props) {
+
   return (
     <div className='carInfoBox'>
       <span className='carBoxTopInfo'>
@@ -30,7 +31,6 @@ function CarInfoBox(props) {
           <Link to={`/NewMaintenance/${props.vehicle.id}`}>
             <p className='carBoxLink'>New Maintenance</p>
           </Link>
-          <p className='carBoxLinkRed'>Delete</p>
         </div>
       </span>
     </div>

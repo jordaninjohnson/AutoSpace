@@ -31,7 +31,8 @@ module.exports = function(sequelize, DataTypes) {
     Maintenance.belongsTo(models.Vehicle, {
       foreignKey: {
         allowNull: false
-      }
+      },
+      onDelete: "cascade"
     });
   };
 

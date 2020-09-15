@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Message from "../components/Message";
 import { Link, withRouter } from "react-router-dom";
 import "./vehicleDisplay.css";
 import API from "../utils/API";
@@ -32,8 +33,8 @@ class VehicleDisplay extends Component {
       conditionDescription: "",
       maintRecords: [],
       maintRecordsTable: {},
-      url: "https://www.google.com/maps/embed/v1/search?key=AIzaSyARakaUOSHnemUU6-KrvQTD2Mpc9JwcdO0&q=car+maintenance+near+",
-      title: "Car Maintenance near "
+      url: "https://www.google.com/maps/embed/v1/search?key=AIzaSyARakaUOSHnemUU6-KrvQTD2Mpc9JwcdO0&q=car+maintenance+near+saltlakecity",
+      title: "Car Maintenance Salt Lake City, Utah"
     };
   };
   componentDidMount() {
@@ -44,15 +45,15 @@ class VehicleDisplay extends Component {
           coordinates: position.coords.latitude + "," + position.coords.longitude
         }
         //use user's coordinates to get city and state
-        API
-          .getLocation(coordinates)
-          .then(data => {
-            this.setState({
-              url: this.state.url + data.data.message,
-              title: this.state.title + data.data.message
-            })
-          })
-          .catch(err => console.log(err));
+        // API
+        //   .getLocation(coordinates)
+        //   .then(data => {
+        //     this.setState({
+        //       url: this.state.url + data.data.message,
+        //       title: this.state.title + data.data.message
+        //     })
+        //   })
+        //   .catch(err => console.log(err));
       });
     }
     //get vehicle id
@@ -116,8 +117,6 @@ class VehicleDisplay extends Component {
   };
 
   vinSubmit = (e) => {
-    // jf1gd29622g513305 -- real vin for testing;
-    // this.state.vehicle.vin   how to access vin user entered
     axios.get('http://api.carmd.com/v3.0/decode?vin=' + this.state.vehicle.vin, {
       headers: {
         "content-type": "application/json",
@@ -133,6 +132,20 @@ class VehicleDisplay extends Component {
     });
   }
   signOut = () => { localStorage.clear(); window.location.reload(); }
+
+  deleteVehicle = () => {
+    API
+      .deleteVehicle(this.state.vehicleID)
+      .then(() => {
+        this.props.history.push("/Members");
+        const info = ["Vehicle Deleted", "success", "animate__bounceIn", "animate__bounceOut"];
+        Message(info);
+      })
+      .catch(err => {
+        const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"];
+        Message(info);
+      });
+  }
 
   render() {
     return (
@@ -187,7 +200,7 @@ class VehicleDisplay extends Component {
               <Link to={`/NewMaintenance/${this.state.vehicle.id}`}>
                 <p className='vehicleBoxLink'>New Maintenance</p>
               </Link>
-              <p className='vehicleBoxLinkRed'>Delete</p>
+              <p className='vehicleBoxLinkRed' onClick={this.deleteVehicle}>Delete</p>
             </div>
           </div>
         </div>
