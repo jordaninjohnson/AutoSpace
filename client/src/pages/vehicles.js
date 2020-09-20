@@ -97,7 +97,7 @@ export default function Vehicles(props) {
       Message(info);
       return;
     }
-    if (navigator.onLine) {
+    if (navigator.onLine && file.name) {
       setDisable("true");
       setSpinner("");
       setButton("Uploading...");
