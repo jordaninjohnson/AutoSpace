@@ -6,7 +6,7 @@
 // sequelize (lowercase) references our connection to the DB.
 // const sequelize = require("../config/config.json");
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const Vehicle = sequelize.define("Vehicle", {
     type: {
       type: DataTypes.STRING,
@@ -44,15 +44,18 @@ module.exports = function(sequelize, DataTypes) {
     },
     imageUrl: {
       type: DataTypes.STRING
+    },
+    UserId: {
+      type: DataTypes.STRING
     }
   });
 
   //Vehicles Association
-  Vehicle.associate = models => {
-    Vehicle.belongsTo(models.User, { foreignKey: { allowNull: false } });
-    Vehicle.hasMany(models.Maintenance, {
-      onDelete: "cascade"
-    });
-  };
+  // Vehicle.associate = models => {
+  //   Vehicle.belongsTo(models.User, { foreignKey: { allowNull: false } });
+  //   Vehicle.hasMany(models.Maintenance, {
+  //     onDelete: "cascade"
+  //   });
+  // };
   return Vehicle;
 };

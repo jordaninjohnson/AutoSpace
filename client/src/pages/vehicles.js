@@ -46,7 +46,7 @@ export default function Vehicles(props) {
     more: false
   });
   const [vehicleOwners, setVehicleOwners] = useState(2);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState({});
   const [userId, setUserId] = useContext(AuthContext);
 
   const signOut = () => { setUserId({ showNotification: true }); localStorage.clear(); window.location.reload(); }

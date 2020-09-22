@@ -24,17 +24,20 @@ module.exports = function(sequelize, DataTypes) {
     },
     imageUrl: {
       type: DataTypes.STRING
+    },
+    VehicleId: {
+      type: DataTypes.STRING
     }
   });
 
-  Maintenance.associate = function(models) {
-    Maintenance.belongsTo(models.Vehicle, {
-      foreignKey: {
-        allowNull: false
-      },
-      onDelete: "cascade"
-    });
-  };
+  // Maintenance.associate = function(models) {
+  //   Maintenance.belongsTo(models.Vehicle, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     },
+  //     onDelete: "cascade"
+  //   });
+  // };
 
   return Maintenance;
 };

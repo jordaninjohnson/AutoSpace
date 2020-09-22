@@ -25,7 +25,7 @@ function Login(props) {
   const [spinner, setSpinner] = useState("d-none");
   const [disable, setDisable] = useState("");
   const [signup, setSignup] = useState("Sign Up");
-  const [file, setFile] = useState();
+  const [file, setFile] = useState({});
 
   const handleLogInSubmit = (e) => {
     e.preventDefault();
