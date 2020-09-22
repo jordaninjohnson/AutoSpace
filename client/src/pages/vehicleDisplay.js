@@ -142,8 +142,9 @@ class VehicleDisplay extends Component {
         Message(info);
       })
       .catch(err => {
-        const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"];
-        Message(info);
+        // const info = [err.message, "danger", "animate__shakeX", "animate__fadeOut"];
+        // Message(info);
+        console.log(err.message)
       });
   }
 

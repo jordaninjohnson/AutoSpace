@@ -65,7 +65,7 @@ class NewMaintenance extends Component {
       Message(info);
       return;
     }
-    if (navigator.onLine) {
+    if (navigator.onLine && this.state.file.name) {
       this.setState({
         disable: "true",
         button: "Uploading...",

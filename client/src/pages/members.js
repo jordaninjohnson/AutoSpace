@@ -49,6 +49,7 @@ export default function Members() {
         }
       })
       .catch(err => {
+        console.log("here")
         if (JSON.parse(localStorage.getItem("vehicles")) && err.message === "Network Error") {
           const data = JSON.parse(localStorage.getItem("vehicles"));
           setVehicle([
