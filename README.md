@@ -38,7 +38,7 @@ User Story: As a used vehicle owner I would like to fully understand the conditi
 
 <h1>Usage</h1>
 
-* Provide instructions and examples for use. Include screenshots as needed.
+![image](./client/public/images/adobexd.png)
 
 <h1>Contributing</h1>
 
