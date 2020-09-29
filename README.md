@@ -2,10 +2,13 @@
 
 <h1>MyAutoSpace!</h1>
 
-<h1>Description</h1>
-
-MyAutoSpace is must have for any home mechanic.The simple interface allows users to document their vehicle histories and keep up with suggested maintenance.
 Deployed Link: https://young-lake-34599.herokuapp.com/
+
+<h1>Description</h1>
+MyAutoSpace is your all-in-one app to track all maintenance you have done to your vehicle. Using our API’s you can discover mechanics nearby and future maintenance required for your vehicle.
+
+User Story: As a used vehicle owner I would like to fully understand the condition of my vehicle. I need a way to keep track of my repairs, parts and expenses. Understanding the future maintenance required for my vehicle is essential to improve its longevity. A thorough record of my vehicle will make it easier to sell if I decide to do so.  
+
 <h1>Table of Contents</h1>
 
 <ul>
