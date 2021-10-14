@@ -5,7 +5,7 @@
 Deployed Link: https://young-lake-34599.herokuapp.com/
 
 <h1>Description</h1>
-MyAutoSpace is your all-in-one app to track all maintenance you have done to your vehicle. Using our API’s you can discover mechanics nearby and future maintenance required for your vehicle.
+MyAutoSpace can be thought of as a Facebook for vehicles. Progressive Web Application with the capability to capture and upload your own images from any of your favorite mobile devices. Use images to help record your vehicle’s history and repairs. Utilize Google Maps API in order to discover nearby mechanics or generate a suggested maintenance schedule directly from your manufacturer using CarMD.
 
 User Story: As a used vehicle owner I would like to fully understand the condition of my vehicle. I need a way to keep track of my repairs, parts and expenses. Understanding the future maintenance required for my vehicle is essential to improve its longevity. A thorough record of my vehicle will make it easier to sell if I decide to do so.  
 
